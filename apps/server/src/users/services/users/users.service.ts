@@ -10,9 +10,14 @@ export class UsersService {
     constructor(@InjectRepository(User) private userRepository: Repository<User>) {
     }
 
+    public findUsers() {
+      return this.userRepository.find({ relations: ['role'] });
+    }
+
     public createUser(userDetails: CreateUserDto) {
         const newUser = this.userRepository.create({
             ...userDetails,
+            roleId: 1,
             createdAt: new Date().toUTCString(),
         });
         return this.userRepository.save(newUser);

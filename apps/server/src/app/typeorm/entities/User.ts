@@ -1,5 +1,5 @@
-import {Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-import {Role} from "./Role";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Role} from './Role';
 
 @Entity({ name: 'users' })
 export class User {
@@ -30,7 +30,10 @@ export class User {
     @Column()
     createdAt: string;
 
-    @OneToOne(() => Role)
-    @JoinColumn()
+    @Column({nullable: true})
+    roleId: number;
+
+    @ManyToOne(() => Role, (Role) => Role.id)
+    @JoinColumn({name: 'roleId'})
     role: Role;
 }
