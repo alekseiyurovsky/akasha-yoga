@@ -24,7 +24,7 @@ export class User {
     @Column({nullable: true})
     about: string;
 
-    @Column()
+    @Column({nullable: true})
     gender: string;
 
     @Column()

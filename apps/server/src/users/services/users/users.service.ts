@@ -3,6 +3,7 @@ import {User} from "../../../app/typeorm/entities/User";
 import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 import {CreateUserDto} from "../../dtos/CreateUser.dto";
+import {PatchUserDetails} from "../../utils/types";
 
 @Injectable()
 export class UsersService {
@@ -15,6 +16,10 @@ export class UsersService {
             createdAt: new Date().toUTCString(),
         });
         return this.userRepository.save(newUser);
+    }
+
+    public updateUser(id: number, patchUserDetails: PatchUserDetails) {
+        return this.userRepository.update({ id }, { ...patchUserDetails });
     }
 
 }

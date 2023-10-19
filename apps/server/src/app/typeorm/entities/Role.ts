@@ -9,5 +9,5 @@ export class Role {
     name: string;
 
     @Column()
-    access_level: string;
+    access_level: number;
 }
