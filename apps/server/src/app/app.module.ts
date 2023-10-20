@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
 import {AnnouncementsModule} from '../announcements/announcements.module';
 import {ArticlesModule} from '../articles/articles.module';
+import {TrainingsModule} from '../trainings/trainings.module';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
@@ -26,7 +27,8 @@ import {UsersModule} from "../users/users.module";
         }),
         UsersModule,
         ArticlesModule,
-        AnnouncementsModule
+        AnnouncementsModule,
+        TrainingsModule
     ],
     controllers: [AppController],
     providers: [AppService],

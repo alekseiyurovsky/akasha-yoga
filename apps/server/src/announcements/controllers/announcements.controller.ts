@@ -8,22 +8,22 @@ export class AnnouncementsController {
   constructor(private announcementsService: AnnouncementsService) {}
 
   @Get()
-  getArticles() {
+  getAnnouncements() {
     return this.announcementsService.findAnnouncements();
   }
 
   @Get(':id')
-  getArticle(@Param('id', ParseIntPipe) id: number) {
+  getAnnouncement(@Param('id', ParseIntPipe) id: number) {
     return this.announcementsService.findOne(id);
   }
 
   @Post()
-  createArticle(@Body() createAnnouncementDto: CreateAnnouncementDto) {
+  createAnnouncement(@Body() createAnnouncementDto: CreateAnnouncementDto) {
     return this.announcementsService.createAnnouncement(createAnnouncementDto);
   }
 
   @Patch(':id')
-  async updateArticleById(
+  async updateAnnouncementById(
     @Param('id', ParseIntPipe) id: number,
     @Body() patchAnnouncementDto: Partial<PatchAnnouncementDto>,
   ) {
