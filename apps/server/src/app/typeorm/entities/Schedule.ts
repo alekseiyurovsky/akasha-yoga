@@ -11,10 +11,10 @@ export class Schedule {
     date: string;
 
     @Column({default: '[]'})
-    unapproved_participients: string;
+    unapproved_entrants: string;
 
     @Column({default: '[]'})
-    approved_participients: string;
+    approved_entrants: string;
 
     @Column()
     training_id: number;

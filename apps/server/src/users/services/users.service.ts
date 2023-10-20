@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
 import {User} from "../../app/typeorm/entities/User";
-import {Repository} from "typeorm";
+import {In, Repository} from 'typeorm';
 import {InjectRepository} from "@nestjs/typeorm";
 import {CreateUserDto} from "../dtos/CreateUser.dto";
 import {PatchUserDetails} from "../utils/types";
@@ -16,6 +16,19 @@ export class UsersService {
 
     public findOne(id: number): Promise<User> {
       return this.userRepository.findOne({ where: { id }, relations: ['role'] });
+    }
+
+    public findMany(ids: number[]): Promise<User[]> {
+      return this.userRepository.find({
+        where: {
+          id: In(ids)
+        },
+        select: {
+          id: true,
+          name: true,
+          surname: true
+        }
+      });
     }
 
     public createUser(userDetails: CreateUserDto) {

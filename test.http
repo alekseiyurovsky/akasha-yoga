@@ -116,6 +116,32 @@ GET http://localhost:3000/api/trainings
 ### Get single training by training-id
 GET http://localhost:3000/api/trainings/2
 
+### SCHEDULES
+
+### Add schedule
+POST http://localhost:3000/api/schedules
+Content-Type: application/json
+
+{
+  "date": "i am a training",
+  "author_id": 2,
+  "training_id": 2
+}
+
+### Patch schedule
+PATCH http://localhost:3000/api/schedules/1
+Content-Type: application/json
+
+{
+  "approved_entrants": [1,2,3]
+}
+
+### Get all schedules
+GET http://localhost:3000/api/schedules
+
+### Get single schedule by schedule-id
+GET http://localhost:3000/api/schedules/1
+
 
 
 
