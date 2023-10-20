@@ -30,7 +30,7 @@ export class User {
     @Column()
     createdAt: string;
 
-    @Column({nullable: true})
+    @Column()
     roleId: number;
 
     @ManyToOne(() => Role, (Role) => Role.id)

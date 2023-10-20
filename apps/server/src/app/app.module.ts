@@ -1,7 +1,12 @@
 import {Module} from '@nestjs/common';
+import {ArticlesModule} from '../articles/articles.module';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {Announcement} from './typeorm/entities/Announcement';
+import {Article} from './typeorm/entities/Article';
+import {Schedule} from './typeorm/entities/Schedule';
+import {Training} from './typeorm/entities/Training';
 import {User} from "./typeorm/entities/User";
 import {Role} from "./typeorm/entities/Role";
 import {UsersModule} from "../users/users.module";
@@ -15,10 +20,11 @@ import {UsersModule} from "../users/users.module";
             username: 'akasha',
             password: 'g63gados85', //todo  find secure way
             database: 'akashayoga',
-            entities: [User, Role],
-            synchronize: true
+            entities: [User, Role, Article, Schedule, Training, Announcement],
+            synchronize: false
         }),
-        UsersModule
+        UsersModule,
+        ArticlesModule
     ],
     controllers: [AppController],
     providers: [AppService],

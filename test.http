@@ -1,0 +1,112 @@
+### USERS
+
+### Add user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "email": "1233@email.com",
+  "name": "John 3",
+  "surname": "Surnamejohn 2",
+  "password_hash": "1233",
+  "date_of_birth": "1233"
+}
+
+### Patch user
+PATCH http://localhost:3000/api/users/1
+Content-Type: application/json
+
+{
+  "name": "Filippo",
+  "roleId": 1
+}
+
+### Get all users
+GET http://localhost:3000/api/users
+
+### Get single user by id users
+GET http://localhost:3000/api/users/1
+
+### ARTICLES
+
+### Add articles
+POST http://localhost:3000/api/articles
+Content-Type: application/json
+
+{
+  "title": "i am a title",
+  "text": "textie",
+  "image_url": "Surnamejohn 2",
+  "author_id": "2"
+}
+
+### Patch article
+PATCH http://localhost:3000/api/articles/1
+Content-Type: application/json
+
+{
+  "author_id": 1
+}
+
+### Get all articles
+GET http://localhost:3000/api/articles
+
+### Get single article by article_id
+GET http://localhost:3000/api/articles/1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Send POST request with body as parameters
+POST https://httpbin.org/post
+Content-Type: application/x-www-form-urlencoded
+
+id=999&value=content
+
+### Send a form with the text and file fields
+POST https://httpbin.org/post
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="element-name"
+Content-Type: text/plain
+
+Name
+--WebAppBoundary
+Content-Disposition: form-data; name="data"; filename="data.json"
+Content-Type: application/json
+
+< ./request-form-data.json
+--WebAppBoundary--
+
+### Send request with dynamic variables in request's body
+POST https://httpbin.org/post
+Content-Type: application/json
+
+{
+  "id": {{$uuid}},
+  "price": {{$randomInt}},
+  "ts": {{$timestamp}},
+  "value": "content"
+}
+
+###
