@@ -25,9 +25,9 @@ export class ArticlesController {
   @Patch(':id')
   async updateArticleById(
     @Param('id', ParseIntPipe) id: number,
-    @Body() patchUserDto: Partial<PatchArticleDto>,
+    @Body() patchArticleDto: Partial<PatchArticleDto>,
   ) {
-    await this.articlesService.updateArticle(id, patchUserDto);
+    await this.articlesService.updateArticle(id, patchArticleDto);
     return this.articlesService.findOne(id);
   }
 }

@@ -37,7 +37,7 @@ Content-Type: application/json
   "title": "i am a title",
   "text": "textie",
   "image_url": "Surnamejohn 2",
-  "author_id": "2"
+  "author_id": 2
 }
 
 ### Patch article
@@ -53,6 +53,34 @@ GET http://localhost:3000/api/articles
 
 ### Get single article by article_id
 GET http://localhost:3000/api/articles/1
+
+### NEWS
+
+### Add news
+POST http://localhost:3000/api/news
+Content-Type: application/json
+
+{
+  "title": "i am a newsiw",
+  "text": "newsiw",
+  "image_url": "Surnamejohn 2",
+  "author_id": 2,
+  "priority": 2
+}
+
+### Patch news
+PATCH http://localhost:3000/api/news/1
+Content-Type: application/json
+
+{
+  "author_id": 1
+}
+
+### Get all news
+GET http://localhost:3000/api/news
+
+### Get single news by news-id
+GET http://localhost:3000/api/news/1
 
 
 

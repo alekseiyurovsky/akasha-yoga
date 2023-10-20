@@ -1,4 +1,5 @@
 import {Module} from '@nestjs/common';
+import {AnnouncementsModule} from '../announcements/announcements.module';
 import {ArticlesModule} from '../articles/articles.module';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
@@ -24,7 +25,8 @@ import {UsersModule} from "../users/users.module";
             synchronize: false
         }),
         UsersModule,
-        ArticlesModule
+        ArticlesModule,
+        AnnouncementsModule
     ],
     controllers: [AppController],
     providers: [AppService],
