@@ -1,3 +1,25 @@
+### AUTH
+
+### Sign-up
+POST http://localhost:3000/api/auth/sign-up
+Content-Type: application/json
+
+{
+  "email": "test@email.com",
+  "name": "Eva",
+  "surname": "Polna",
+  "password_hash": "123213"
+}
+
+### Sign-in
+POST http://localhost:3000/api/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "test@email.com",
+  "password_hash": "123213"
+}
+
 ### USERS
 
 ### Add user

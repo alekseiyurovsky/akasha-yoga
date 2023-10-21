@@ -3,5 +3,4 @@ export interface CreateUserDto {
   name: string;
   surname: string;
   password_hash: string;
-  date_of_birth: string;
 }

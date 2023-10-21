@@ -13,6 +13,7 @@ import {Training} from './typeorm/entities/Training';
 import {User} from "./typeorm/entities/User";
 import {Role} from "./typeorm/entities/Role";
 import {UsersModule} from "../users/users.module";
+import {AuthModule} from "../auth/auth.module";
 
 @Module({
     imports: [
@@ -30,7 +31,8 @@ import {UsersModule} from "../users/users.module";
         ArticlesModule,
         AnnouncementsModule,
         TrainingsModule,
-        SchedulesModule
+        SchedulesModule,
+        AuthModule
     ],
     controllers: [AppController],
     providers: [AppService],

@@ -1,5 +1,6 @@
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {Role} from './Role';
+import * as bcrypt from 'bcrypt';
 
 @Entity({ name: 'users' })
 export class User {
@@ -18,7 +19,7 @@ export class User {
     @Column({ unique: true })
     email: string;
 
-    @Column()
+    @Column({nullable: true})
     date_of_birth: string;
 
     @Column({nullable: true})
@@ -27,8 +28,8 @@ export class User {
     @Column({nullable: true})
     gender: string;
 
-    @Column()
-    createdAt: string;
+    @CreateDateColumn()
+    created_at: string;
 
     @Column()
     roleId: number;
@@ -36,4 +37,8 @@ export class User {
     @ManyToOne(() => Role, (Role) => Role.id)
     @JoinColumn({name: 'roleId'})
     role: Role;
+
+    async validatePassword(password: string): Promise<boolean> {
+        return bcrypt.compare(password, this.password_hash);
+    }
 }
