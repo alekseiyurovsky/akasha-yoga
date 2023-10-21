@@ -36,10 +36,7 @@ export class AnnouncementsService {
   }
 
   public createAnnouncement(announcementDetails: CreateAnnouncementDto) {
-    const announcement = this.announcementRepository.create({
-      ...announcementDetails,
-      date_added: new Date().toUTCString()
-    });
+    const announcement = this.announcementRepository.create(announcementDetails);
     return this.announcementRepository.save(announcement);
   }
 

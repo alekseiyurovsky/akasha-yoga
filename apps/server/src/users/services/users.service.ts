@@ -1,34 +1,55 @@
 import {Injectable} from '@nestjs/common';
 import {User} from "../../app/typeorm/entities/User";
-import {In, Repository} from 'typeorm';
+import {Equal, In, MoreThan, Repository} from 'typeorm';
 import {InjectRepository} from "@nestjs/typeorm";
 import {CreateUserDto} from "../dtos/CreateUser.dto";
 import {PatchUserDetails} from "../utils/types";
+import {Schedule} from "../../app/typeorm/entities/Schedule";
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(User) private userRepository: Repository<User>) {
+    constructor(
+        @InjectRepository(User) private userRepository: Repository<User>,
+        @InjectRepository(Schedule) private scheduleRepository: Repository<Schedule>
+    ) {
     }
 
     public findUsers() {
-      return this.userRepository.find({ relations: ['role'] });
+        return this.userRepository.find({relations: ['role']});
     }
 
     public findOne(id: number): Promise<User> {
-      return this.userRepository.findOne({ where: { id }, relations: ['role'] });
+        return this.userRepository.findOne({where: {id}, relations: ['role']});
+    }
+
+    public async getUserSchedules(id: number): Promise<Schedule[]> {
+        const trainings = await this.scheduleRepository
+            .createQueryBuilder('schedule')
+            .where(`date > CURDATE() AND (JSON_CONTAINS(unapproved_entrants, "${id}") OR JSON_CONTAINS(approved_entrants, "${id}"))`)
+            .getMany();
+        return trainings;
+    }
+
+    public async getInstructorSchedules(id: number): Promise<Schedule[]> {
+        return this.scheduleRepository.find({
+            where: {
+                author_id: Equal(id),
+                date: MoreThan(new Date())
+            }
+        });
     }
 
     public findMany(ids: number[]): Promise<User[]> {
-      return this.userRepository.find({
-        where: {
-          id: In(ids)
-        },
-        select: {
-          id: true,
-          name: true,
-          surname: true
-        }
-      });
+        return this.userRepository.find({
+            where: {
+                id: In(ids)
+            },
+            select: {
+                id: true,
+                name: true,
+                surname: true
+            }
+        });
     }
 
     public createUser(userDetails: CreateUserDto) {
@@ -41,6 +62,6 @@ export class UsersService {
     }
 
     public updateUser(id: number, patchUserDetails: PatchUserDetails) {
-        return this.userRepository.update({ id }, { ...patchUserDetails });
+        return this.userRepository.update({id}, {...patchUserDetails});
     }
 }

@@ -5,11 +5,11 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "email": "1233@email.com",
-  "name": "John 3",
-  "surname": "Surnamejohn 2",
-  "password_hash": "1233",
-  "date_of_birth": "1233"
+  "email": "123123@email.com",
+  "name": "John 1112",
+  "surname": "Surnamejohn 1121",
+  "password_hash": "123213",
+  "date_of_birth": "121233"
 }
 
 ### Patch user
@@ -17,7 +17,7 @@ PATCH http://localhost:3000/api/users/1
 Content-Type: application/json
 
 {
-  "name": "Filippo",
+  "name": "Filippo 22",
   "roleId": 1
 }
 
@@ -26,6 +26,12 @@ GET http://localhost:3000/api/users
 
 ### Get single user by id users
 GET http://localhost:3000/api/users/1
+
+### Get user schedules
+GET http://localhost:3000/api/users/1/schedules
+
+### Get instructor schedules
+GET http://localhost:3000/api/users/1/instructor_schedules
 
 ### ARTICLES
 
@@ -64,7 +70,7 @@ Content-Type: application/json
   "title": "i am a newsiw",
   "text": "newsiw",
   "image_url": "Surnamejohn 2",
-  "author_id": 2,
+  "author_id": 1,
   "priority": 2
 }
 
@@ -92,7 +98,7 @@ Content-Type: application/json
   "name": "i am a training",
   "description": "newsiw",
   "image_url": "Surnamejohn 2",
-  "author_id": 2,
+  "author_id": 4,
   "duration": 2,
   "max_count": 15
 }
@@ -123,17 +129,18 @@ POST http://localhost:3000/api/schedules
 Content-Type: application/json
 
 {
-  "date": "i am a training",
-  "author_id": 2,
-  "training_id": 2
+  "date": "2025-06-06T21:00:00.000Z",
+  "author_id": 1,
+  "training_id": 1
 }
 
 ### Patch schedule
-PATCH http://localhost:3000/api/schedules/1
+PATCH http://localhost:3000/api/schedules/3
 Content-Type: application/json
 
 {
-  "approved_entrants": [1,2,3]
+  "unapproved_entrants": [],
+  "approved_entrants": [1]
 }
 
 ### Get all schedules

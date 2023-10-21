@@ -1,6 +1,6 @@
 export interface PatchScheduleDto {
   date: string;
   training_id: number;
-  entrants: number[];
+  unapproved_entrants: number[];
   approved_entrants: number[];
 }

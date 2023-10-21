@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {User} from './User';
 
 @Entity({name: 'announcements'})
@@ -18,7 +18,7 @@ export class Announcement {
     @Column()
     priority: number;
 
-    @Column()
+    @CreateDateColumn()
     date_added: string;
 
     @Column()

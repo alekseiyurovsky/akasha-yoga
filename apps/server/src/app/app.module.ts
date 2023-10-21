@@ -24,7 +24,7 @@ import {UsersModule} from "../users/users.module";
             password: 'g63gados85', //todo  find secure way
             database: 'akashayoga',
             entities: [User, Role, Article, Schedule, Training, Announcement],
-            synchronize: false
+            synchronize: true
         }),
         UsersModule,
         ArticlesModule,

@@ -2,13 +2,13 @@ import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typ
 import {Training} from './Training';
 import {User} from './User';
 
-@Entity({name: 'schedule'})
+@Entity({name: 'schedules'})
 export class Schedule {
     @PrimaryGeneratedColumn({type: 'bigint'})
     id: number;
 
-    @Column()
-    date: string;
+    @Column('datetime')
+    date: Date;
 
     @Column({default: '[]'})
     unapproved_entrants: string;

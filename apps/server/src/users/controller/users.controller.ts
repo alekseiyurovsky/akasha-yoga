@@ -18,6 +18,16 @@ export class UsersController {
       return this.userService.findOne(id);
     }
 
+    @Get(':id/schedules')
+    getUserSchedules(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.getUserSchedules(id);
+    }
+
+    @Get(':id/instructor_schedules')
+    getInstructorSchedules(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.getInstructorSchedules(id);
+    }
+
     @Post()
     createUser(@Body() createUserDto: CreateUserDto) {
         return this.userService.createUser(createUserDto);

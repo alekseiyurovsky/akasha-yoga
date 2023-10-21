@@ -35,10 +35,7 @@ export class TrainingsService {
   }
 
   public createTraining(trainingDetails: CreateTrainingDto) {
-    const training = this.trainingRepository.create({
-      ...trainingDetails,
-      date_added: new Date().toUTCString()
-    });
+    const training = this.trainingRepository.create(trainingDetails,);
     return this.trainingRepository.save(training);
   }
 

@@ -35,10 +35,7 @@ export class ArticlesService {
   }
 
   public createArticle(articleDetails: CreateArticleDto) {
-    const article = this.articleRepository.create({
-      ...articleDetails,
-      date_added: new Date().toUTCString()
-    });
+    const article = this.articleRepository.create(articleDetails);
     return this.articleRepository.save(article);
   }
 

@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {User} from './User';
 
 @Entity({name: 'trainings'})
@@ -15,7 +15,7 @@ export class Training {
     @Column({nullable: true})
     image_url: string;
 
-    @Column()
+    @CreateDateColumn()
     date_added: string;
 
     @Column()
