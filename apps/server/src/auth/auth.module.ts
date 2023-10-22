@@ -16,7 +16,7 @@ import {Schedule} from "../app/typeorm/entities/Schedule";
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.register({
             secret: process.env.JWT_SECRET || 'secret',
-            signOptions: { expiresIn: '1h' },
+            signOptions: { expiresIn: '2h' },
         }),
         TypeOrmModule.forFeature([User, Training, Schedule])
     ],
