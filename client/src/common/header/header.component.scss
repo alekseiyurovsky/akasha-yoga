@@ -1,9 +1,13 @@
 @import './../../styles/variables';
 
+$img-width: 290px;
+$social-icon-width: 40px;
+
 :host {
   width: 100%;
+  background-color: #ffffffbb;
   display: block;
-  box-shadow: 0 7px 13px -3px rgba(0,0,0,0.46);
+  box-shadow: 0 7px 13px -3px rgba(0, 0, 0, 0.46);
   margin-bottom: 10px;
 }
 
@@ -14,24 +18,39 @@
 }
 
 .logo {
-  width: 360px;
+  width: $img-width;
   cursor: pointer;
-  padding-left: 25px;
+  padding-left: calc(#{$social-icon-width} / 2);
 }
 
 .content {
   display: flex;
   justify-content: space-evenly;
-  padding: 24px 0;
+  padding: 36px 0;
 }
 
 .logo-container {
-  flex: 1 360px;
+  flex: 1 $img-width;
   text-align: center;
 }
 
 .links {
-  flex: 0 50px;
+  flex: 0 $social-icon-width;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .link {
+    flex-basis: $social-icon-width;
+    height: $social-icon-width;
+    filter: grayscale(1);
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      filter: grayscale(0);
+      transform: scale3d(110%, 110%, 110%);
+    }
+  }
 }
 
 .tabs {
@@ -41,4 +60,14 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  overflow: visible;
+
+  .tab {
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      color: darkblue;
+      transform: scale3d(110%, 110%, 110%);
+    }
+  }
 }

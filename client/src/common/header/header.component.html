@@ -1,17 +1,30 @@
 <div class="container">
-    <div class="content">
-        <div class="logo-container">
-            <img [routerLink]="['']" class="logo" src="/assets/images/yoga.png" alt="">
-        </div>
-        <div class="links">link</div>
+  <div class="content">
+    <div class="logo-container">
+      <img [routerLink]="['']" class="logo" src="/assets/images/yoga.png" alt="">
     </div>
-    <div class="tabs">
-        <div class="tab" [routerLink]="['/about']">Par Mums</div>
-        <div class="tab" [routerLink]="['/news']">Jaunumi</div>
-        <div class="tab" [routerLink]="['/blog']">Blogs</div>
-        <div class="tab" [routerLink]="['/trainings']">Treņini</div>
-        <div class="tab" [routerLink]="['/schedule']">Nodarbību grafiks</div>
-        <div class="tab" *ngIf="dataService.isLoggedIn()" [routerLink]="['/user']">{{dataService.getName()}}</div>
+    <div class="links">
+      <a class="link" target="_blank" href="https://www.facebook.com/akashajoga"><img src="/assets/images/fb.svg" alt=""></a>
+      <a class="link" target="_blank" href="https://www.youtube.com/@akashajoga9074"><img src="/assets/images/yt.svg" alt=""></a>
+      <a class="link" target="_blank" href="https://www.instagram.com/"><img src="/assets/images/in.svg" alt=""></a>
     </div>
+  </div>
+  <div class="tabs">
+    <div class="tab" [routerLink]="['/about']">Par Mums</div>
+    <div class="tab" [routerLink]="['/news']">Jaunumi</div>
+    <div class="tab" [routerLink]="['/blog']">Blogs</div>
+    <div class="tab" [routerLink]="['/trainings']">Treņini</div>
+    <div class="tab" [routerLink]="['/schedule']">Nodarbību grafiks</div>
+    <ng-template [ngIf]="dataService.isLoggedIn()" [ngIfElse]="loginTab">
+      <div class="tab" [routerLink]="['/user']">Kabinets</div>
+    </ng-template>
+  </div>
+
+  <ng-template #loginTab>
+    <span class="tab" (click)="login()">Ielogoties</span> / <span class="tab" (click)="signup()">Pierakstītes</span>
+  </ng-template>
 </div>
+<ng-template adHost></ng-template>
+
+
 

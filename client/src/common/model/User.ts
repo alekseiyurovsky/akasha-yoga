@@ -9,3 +9,7 @@ export interface User {
     about?: string;
     role: Role;
 }
+
+export interface SignInResponse extends User {
+  access_token: string;
+}

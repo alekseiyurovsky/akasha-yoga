@@ -1,0 +1,23 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Izveidot jaunu lietotāja kontu</p>
+      <button class="delete" aria-label="close" (click)="dismiss()"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="notification is-danger" *ngIf="error.length">
+        {{error}}
+      </div>
+      <input class="input" [classList]="getCLass('email')" type="email" [(ngModel)]="email" placeholder="E-pasts">
+      <input class="input" type="password" [(ngModel)]="password" placeholder="Parole">
+      <input class="input" type="password" [(ngModel)]="passwordSecond" placeholder="Parole atkārtoti">
+      <input class="input" type="text" [(ngModel)]="name" placeholder="Vards">
+      <input class="input" type="text" [(ngModel)]="surname" placeholder="Uzvards">
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="signup()" [disabled]="!email.length">Ielogoties</button>
+      <button class="button" (click)="dismiss()">Atcelt</button>
+    </footer>
+  </div>
+</div>

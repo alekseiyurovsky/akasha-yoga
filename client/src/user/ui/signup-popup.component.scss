@@ -1,0 +1,13 @@
+.modal-card {
+  top: 30%;
+}
+
+.modal-card-body {
+  .input {
+    margin-top: 20px;
+
+    &:first-of-type {
+      margin-top: 5px;
+    }
+  }
+}
