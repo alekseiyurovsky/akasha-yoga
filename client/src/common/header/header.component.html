@@ -1,1 +1,17 @@
-I AM HeadeR
+<div class="container">
+    <div class="content">
+        <div class="logo-container">
+            <img [routerLink]="['']" class="logo" src="/assets/images/yoga.png" alt="">
+        </div>
+        <div class="links">link</div>
+    </div>
+    <div class="tabs">
+        <div class="tab" [routerLink]="['/about']">Par Mums</div>
+        <div class="tab" [routerLink]="['/news']">Jaunumi</div>
+        <div class="tab" [routerLink]="['/blog']">Blogs</div>
+        <div class="tab" [routerLink]="['/trainings']">Treņini</div>
+        <div class="tab" [routerLink]="['/schedule']">Nodarbību grafiks</div>
+        <div class="tab" *ngIf="dataService.isLoggedIn()" [routerLink]="['/user']">{{dataService.getName()}}</div>
+    </div>
+</div>
+

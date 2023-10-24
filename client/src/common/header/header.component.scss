@@ -1,0 +1,44 @@
+@import './../../styles/variables';
+
+:host {
+  width: 100%;
+  display: block;
+  box-shadow: 0 7px 13px -3px rgba(0,0,0,0.46);
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: $base-width;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 360px;
+  cursor: pointer;
+  padding-left: 25px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0;
+}
+
+.logo-container {
+  flex: 1 360px;
+  text-align: center;
+}
+
+.links {
+  flex: 0 50px;
+}
+
+.tabs {
+  display: flex;
+  font-size: 20px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
