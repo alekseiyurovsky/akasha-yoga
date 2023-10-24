@@ -1,0 +1,9 @@
+@import './../styles/variables';
+
+main {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+  max-width: $base-width;
+  margin: 0 auto;
+}

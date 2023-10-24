@@ -1,0 +1,19 @@
+@import './../styles/variables';
+
+:host {
+  margin: 16px 0;
+  width: 100%;
+  min-height: 300px;
+  display: block;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}

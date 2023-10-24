@@ -7,6 +7,7 @@ import {DataService} from '../../common/data.service';
 import {HttpService} from '../../common/http.service';
 import {SignInResponse} from '../../common/model/User';
 import {DynamicPopupContainerComponent} from '../../common/ui/dynamic-popup-container.component';
+import {LocalStorageService} from "../../common/local-storage.service";
 
 @Component({
   selector: 'fse-login-popup',
@@ -22,7 +23,11 @@ export class LoginPopupComponent extends DynamicPopupContainerComponent {
   password = '';
   error = '';
 
-  constructor(private httpService: HttpService, private dataService: DataService) {
+  constructor(
+      private httpService: HttpService,
+      private dataService: DataService,
+      private storage: LocalStorageService
+  ) {
     super();
   }
 
@@ -33,6 +38,7 @@ export class LoginPopupComponent extends DynamicPopupContainerComponent {
     ).subscribe(
       ({access_token, ...user}) => {
         this.httpService.setToken(access_token ?? '');
+        this.storage.set(access_token);
         this.dataService.setUser(user);
         this.apply();
       },

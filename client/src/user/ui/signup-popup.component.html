@@ -6,18 +6,26 @@
       <button class="delete" aria-label="close" (click)="dismiss()"></button>
     </header>
     <section class="modal-card-body">
-      <div class="notification is-danger" *ngIf="error.length">
-        {{error}}
-      </div>
-      <input class="input" [classList]="getCLass('email')" type="email" [(ngModel)]="email" placeholder="E-pasts">
-      <input class="input" type="password" [(ngModel)]="password" placeholder="Parole">
-      <input class="input" type="password" [(ngModel)]="passwordSecond" placeholder="Parole atkārtoti">
-      <input class="input" type="text" [(ngModel)]="name" placeholder="Vards">
-      <input class="input" type="text" [(ngModel)]="surname" placeholder="Uzvards">
+      <ng-template [ngIf]="!success" [ngIfElse]="successMsg">
+        <div class="notification is-danger" *ngIf="error.length">
+          {{error}}
+        </div>
+        <input class="input" [class]="getCLass('email')" type="email" [(ngModel)]="email" placeholder="E-pasts">
+        <input class="input" [class]="getCLass('name')" type="text" [(ngModel)]="name" placeholder="Vards">
+        <input class="input" [class]="getCLass('surname')" type="text" [(ngModel)]="surname" placeholder="Uzvards">
+        <input class="input" [class]="getCLass('password')" type="password" [(ngModel)]="password" placeholder="Parole">
+        <input class="input" [class]="getCLass('password')" type="password" [(ngModel)]="passwordSecond" placeholder="Parole atkārtoti">
+      </ng-template>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success" (click)="signup()" [disabled]="!email.length">Ielogoties</button>
-      <button class="button" (click)="dismiss()">Atcelt</button>
+      <button class="button is-success" (click)="signup()" *ngIf="!success">Pierakstīties</button>
+      <button class="button" (click)="dismiss()">{{success ? 'Aizvert' : 'Atcelt'}}</button>
     </footer>
   </div>
 </div>
+
+<ng-template #successMsg>
+  <div class="notification is-success">
+    {{success}}
+  </div>
+</ng-template>

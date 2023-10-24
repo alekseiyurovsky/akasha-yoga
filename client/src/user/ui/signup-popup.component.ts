@@ -51,24 +51,43 @@ export class SignupPopupComponent extends DynamicPopupContainerComponent {
       take(1)
     ).subscribe(
       resp => {
-        this.apply();
+        this.success = 'Konts veiksmīgi izveidots. Aizveriet dialogu un ielogojoties';
       },
       err => {
-        this.error = err.error.message;
+        this.error = err?.error.message;
       }
     );
   }
 
-  getCLass(fieldName): string {
-    return this.invalidFields.has(fieldName)? 'is-danger' : 'is-primary';
+  getCLass(fieldName: string): string {
+    return this.invalidFields.has(fieldName)? 'is-danger' : '';
   }
 
   private validate(): boolean {
+    let isValid = true;
     if (!this.emailRegex.test(this.email)) {
-      this.error = 'Lūdzu, pārbaudiet ievadīto informāciju';
+      isValid = false;
       this.invalidFields.set('email', true);
-      return false;
     }
-    return true;
+
+    if (!this.password || !this.passwordSecond || this.passwordSecond !== this.password) {
+      isValid = false;
+      this.invalidFields.set('password', true);
+    }
+
+    if (!this.name) {
+      isValid = false;
+      this.invalidFields.set('name', true);
+    }
+
+    if (!this.surname) {
+      isValid = false;
+      this.invalidFields.set('surname', true);
+    }
+
+    if (!isValid) {
+      this.error = 'Lūdzu, pārbaudiet ievadīto informāciju';
+    }
+    return isValid;
   }
 }

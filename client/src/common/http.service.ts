@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class HttpService {
 
-  private jwt: string = '';
+  private jwt = '';
   private baseUrl = 'http://localhost:3000/'
 
   constructor(private client: HttpClient) {
@@ -17,7 +17,7 @@ export class HttpService {
     this.jwt = token;
   }
 
-  getToken(token: string): string {
+  getToken(): string {
     return this.jwt;
   }
 

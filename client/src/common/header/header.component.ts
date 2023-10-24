@@ -7,6 +7,7 @@ import {AdDirective} from '../adhost.directive';
 import {DataService} from '../data.service';
 import {HttpService} from '../http.service';
 import {PopupService} from '../popup.service';
+import {SignupPopupComponent} from "../../user/ui/signup-popup.component";
 
 @Component({
   selector: 'fse-header',
@@ -20,27 +21,27 @@ export class HeaderComponent {
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
   constructor(
-    public dataService: DataService,
-    private cdr: ChangeDetectorRef,
-    private injector: Injector,
-    private httpService: HttpService
+    public dataService: DataService
   ) {
   }
 
   login(): void {
     const viewContainerRef = this.adHost.viewContainerRef;
     viewContainerRef.clear();
-    const componentRef = viewContainerRef.createComponent<LoginPopupComponent>(LoginPopupComponent, {
-      injector: this.injector
-    });
+    const componentRef = viewContainerRef.createComponent<LoginPopupComponent>(LoginPopupComponent);
     componentRef.instance.promise
       .finally(() => {
         viewContainerRef.clear();
-      })
-    this.cdr.detectChanges();
+      });
   }
 
   signup(): void {
-
+    const viewContainerRef = this.adHost.viewContainerRef;
+    viewContainerRef.clear();
+    const componentRef = viewContainerRef.createComponent<SignupPopupComponent>(SignupPopupComponent);
+    componentRef.instance.promise
+        .finally(() => {
+          viewContainerRef.clear();
+        });
   }
 }
