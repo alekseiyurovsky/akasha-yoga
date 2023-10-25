@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {DataService} from "../common/data.service";
 import {HttpService} from "../common/http.service";
 import {LocalStorageService} from "../common/local-storage.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {User} from "../common/model/User";
 import {take} from "rxjs";
@@ -34,7 +34,8 @@ export class UserComponent implements OnInit {
         private httpService: HttpService,
         private storage: LocalStorageService,
         private activatedRoute: ActivatedRoute,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private router: Router
     ) {
     }
 
@@ -51,10 +52,11 @@ export class UserComponent implements OnInit {
         })
     }
 
-    public logOut(): void {
+    public async logOut(): Promise<void> {
         this.dataService.cleanUp();
         this.httpService.setToken('');
         this.storage.remove();
+        await this.router.navigate(['']);
     }
 
     public cancel(): void {
