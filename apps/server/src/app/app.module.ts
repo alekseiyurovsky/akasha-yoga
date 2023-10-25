@@ -1,4 +1,7 @@
 import {Module} from '@nestjs/common';
+import {MulterModule} from '@nestjs/platform-express';
+import {ServeStaticModule} from '@nestjs/serve-static';
+import {join} from 'path';
 import {AnnouncementsModule} from '../announcements/announcements.module';
 import {ArticlesModule} from '../articles/articles.module';
 import {SchedulesModule} from '../schedules/schedules.module';
@@ -26,6 +29,16 @@ import {AuthModule} from "../auth/auth.module";
             database: 'akashayoga',
             entities: [User, Role, Article, Schedule, Training, Announcement],
             synchronize: true
+        }),
+        MulterModule.register({
+          dest: './src/assets',
+        }),
+        ServeStaticModule.forRoot({
+          rootPath: join(__dirname, 'assets'),
+          serveStaticOptions: {
+            redirect: false,
+            index: false
+          }
         }),
         UsersModule,
         ArticlesModule,

@@ -40,12 +40,10 @@ export class UserComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.activatedRoute.data.subscribe(({user, userSchedules}) => {
-            if (user) {
-                this.dataService.setUser(user);
-                this.userForm.patchValue({...user});
-            }
+      const {name, surname, email, date_of_birth, about} = this.dataService.getUser();
+      this.userForm.patchValue({name, surname, about, date_of_birth, email} as any);
 
+      this.activatedRoute.data.subscribe(({userSchedules}) => {
             if (userSchedules) {
                 this.dataService.setUserSchedules(userSchedules);
             }

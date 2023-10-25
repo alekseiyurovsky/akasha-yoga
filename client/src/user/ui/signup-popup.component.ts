@@ -3,9 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {take} from 'rxjs';
-import {DataService} from '../../common/data.service';
 import {HttpService} from '../../common/http.service';
-import {SignInResponse} from '../../common/model/User';
 import {DynamicPopupContainerComponent} from '../../common/ui/dynamic-popup-container.component';
 
 @Component({

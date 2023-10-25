@@ -1,1 +1,7 @@
-I AM TRAININGS
+<div *ngIf="dataService.isAdmin()" class="header">
+  <button class="button is-success" (click)="create()">Izveidot treniņu</button>
+</div>
+<div class="content">
+  <fse-training-card *ngFor="let training of trainings" [training]="training"></fse-training-card>
+</div>
+<ng-template adHost></ng-template>
