@@ -9,6 +9,11 @@
   border: 1px solid #cccccc;
   border-radius: 20px;
   padding: 24px;
+
+  fieldset {
+    padding: 0;
+    margin-bottom: 16px;
+  }
 }
 
 .header {
@@ -17,3 +22,8 @@
   justify-content: space-between;
   margin-bottom: 15px;
 }
+
+.button {
+  margin-right: 15px;
+}
+

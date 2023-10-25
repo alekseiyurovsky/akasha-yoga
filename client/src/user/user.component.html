@@ -3,6 +3,53 @@
     <button class="button is-warning" (click)="logOut()">Izlogoties</button>
 </div>
 <div class="columns">
-    <div class="column">is-half</div>
-    <div class="column">is-half</div>
+    <div class="column">
+        <h1 class="title">Jūsu informacija</h1>
+        <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <fieldset [disabled]="!isEdit">
+                <div class="field">
+                    <label class="label">Vards</label>
+                    <div class="control">
+                        <input class="input" type="text" formControlName="name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Uzvards</label>
+                    <div class="control">
+                        <input class="input" type="text" formControlName="surname">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">E-pasts</label>
+                    <div class="control">
+                        <input class="input" type="text" formControlName="email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Dzimšanas datums</label>
+                    <div class="control">
+                        <input class="input" type="text" formControlName="date_of_birth">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Par mani</label>
+                    <div class="control">
+                        <textarea class="textarea" type="text" formControlName="about"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <button *ngIf="isEdit" class="button is-success" type="submit">Saglabāt</button>
+            <button *ngIf="isEdit" class="button is-warning" (click)="cancel()">Atcelt</button>
+            <button *ngIf="!isEdit" class="button is-success" (click)="isEdit = true">Rediģēt</button>
+        </form>
+    </div>
+    <div class="column">
+        <h1 class="title">Jūsu pieraksti</h1>
+        <div *ngIf="!dataService.getSchedules().length" class="notification is-warning">
+            Pašlaik jūs neesat pierakstījušies uz treniņiem.
+        </div>
+        <div *ngIf="dataService.getSchedules().length">
+            <div *ngFor="let schedule of dataService.getSchedules();">{{schedule}}</div>
+        </div>
+    </div>
 </div>

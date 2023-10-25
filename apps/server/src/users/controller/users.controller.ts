@@ -43,10 +43,10 @@ export class UsersController {
 
     @UseGuards(JwtAuthGuard)
     @Patch(':id')
-    async updateUserById(
+     updateUserById(
         @Param('id', ParseIntPipe) id: number,
         @Body() patchUserDto: PatchUserDetails,
     ) {
-        await this.userService.updateUser(id, patchUserDto);
+        return this.userService.updateUser(id, patchUserDto);
     }
 }

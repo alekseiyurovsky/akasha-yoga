@@ -4,6 +4,7 @@ import {provideRouter, withEnabledBlockingInitialNavigation,} from '@angular/rou
 import {UniversalInterceptor} from '../common/universal-interceptor.service';
 import {appRoutes} from './app.routes';
 import {CookieService} from "ngx-cookie-service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 export const appConfig: ApplicationConfig = {
     providers: [

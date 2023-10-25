@@ -37,6 +37,7 @@ Content-Type: application/json
 ### Patch user
 PATCH http://localhost:3000/api/users/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJlbWFpbCI6ImN1YmFAaW5ib3gubHYiLCJuYW1lIjoiVmFyZGllIiwic3VybmFtZSI6IlV6dmFyZGllIiwicm9sZUlkIjoiMSIsImlhdCI6MTY5ODIwNDI3OSwiZXhwIjoxNjk4MjExNDc5fQ.S0DMx6Xr8TDK1jjcw8tXQwQZOHwoQuvVrO-PmoWNm70
 
 {
   "name": "Filippo 22",
@@ -164,7 +165,7 @@ PATCH http://localhost:3000/api/schedules/3
 Content-Type: application/json
 
 {
-  "unapproved_entrants": [],
+  "unapproved_entrants": [5,6,7,8],
   "approved_entrants": [1]
 }
 

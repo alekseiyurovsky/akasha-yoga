@@ -20,6 +20,7 @@ export class DataService {
     }
 
     public getSchedules() {
+        console.log(this.schedules)
         return this.schedules;
     }
 

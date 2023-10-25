@@ -67,7 +67,8 @@ export class UsersService {
         return this.userRepository.save({...newUser, password_hash});
     }
 
-    public updateUser(id: number, patchUserDetails: PatchUserDetails) {
-        return this.userRepository.update({id}, {...patchUserDetails});
+    public async updateUser(id: number, patchUserDetails: PatchUserDetails) {
+        await this.userRepository.update({id}, {...patchUserDetails});
+        return this.findOne(id);
     }
 }
