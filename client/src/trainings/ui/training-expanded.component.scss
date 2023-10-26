@@ -1,0 +1,45 @@
+@import './../../styles/variables';
+
+:host {
+  margin: 16px 0;
+  width: 100%;
+  min-height: 300px;
+  display: block;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.card {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.card-header {
+  border: none;
+  box-shadow: none;
+  padding-bottom: 10px;
+}
+
+.card-image {
+  figure {
+    margin: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+.image {
+  padding: 0;
+  height: 300px;
+}
+
+.card-footer {
+  border: none;
+
+  button {
+    margin-left: 20px;
+  }
+}

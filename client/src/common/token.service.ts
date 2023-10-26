@@ -18,7 +18,6 @@ export class JWTTokenService {
 
     public decodeToken() {
         if (this.jwtToken) {
-            console.log('this.jwtToken', this.jwtToken)
             this.decodedToken = jwt_decode.default(this.jwtToken);
         }
     }

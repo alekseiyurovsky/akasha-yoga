@@ -1,23 +1,17 @@
 import {CommonModule} from '@angular/common';
-import {Component, Input, OnInit} from '@angular/core';
-import {TrainingView} from "../../common/model/Training";
-import {Router} from "@angular/router";
+import {Component, Input} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {TrainingView} from '../../common/model/Training';
 
 @Component({
   selector: 'fse-training-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './training-card.component.html',
   styleUrls: ['./training-card.component.scss']
 })
-export class TrainingCardComponent implements OnInit {
+export class TrainingCardComponent {
 
   @Input()
   training: TrainingView;
-
-  constructor(private router: Router) {}
-
-  public ngOnInit(): void {
-    console.log('hiiiiiiiiiiiiiii');
-  }
 }

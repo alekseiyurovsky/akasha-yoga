@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller,
+  Controller, Delete,
   FileTypeValidator,
   Get, MaxFileSizeValidator,
   Param,
@@ -49,6 +49,13 @@ export class TrainingsController {
   ) {
     await this.trainingsService.updateTraining(id, patchTrainingDto);
     return this.trainingsService.findOne(id);
+  }
+
+  @Delete(':id')
+  async deleteTrainingById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<void> {
+    await this.trainingsService.deleteTraining(id);
   }
 
   @UseGuards(JwtAuthGuard)

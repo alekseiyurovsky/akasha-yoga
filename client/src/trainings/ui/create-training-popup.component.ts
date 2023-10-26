@@ -27,7 +27,7 @@ export class CreateTrainingPopupComponent extends DynamicPopupContainerComponent
     max_count: undefined,
   });
 
-  private file: any;
+  public file: File | null;
 
   constructor(
     private httpService: HttpService,
@@ -65,7 +65,7 @@ export class CreateTrainingPopupComponent extends DynamicPopupContainerComponent
 
     const formData = new FormData();
     formData.append('file', this.file);
-    this.file = undefined;
+    this.file = null;
 
     this.httpService.post<unknown>(`api/trainings/${result.id}/upload`, formData).pipe(
       take(1)

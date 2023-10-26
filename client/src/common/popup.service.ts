@@ -30,7 +30,6 @@ export class PopupService {
   }
 
   public create<T extends DynamicPopupContainerComponent<C>, C = void>(component: Type<T>): T {
-    console.log('here');
     const componentFactory: ComponentFactory<T> = this.componentFactoryResolver.resolveComponentFactory<T>(component);
     const containerComponentRef: ComponentRef<T> = componentFactory.create((this.rootViewContainer as ViewContainerRef).parentInjector);
     const popup: T = containerComponentRef.instance;

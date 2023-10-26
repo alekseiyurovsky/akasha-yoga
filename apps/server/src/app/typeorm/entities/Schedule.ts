@@ -22,7 +22,7 @@ export class Schedule {
     @Column()
     author_id: number;
 
-    @ManyToOne(() => Training, (Training) => Training.id)
+    @ManyToOne(() => Training, (Training) => Training.id,  { onDelete: 'CASCADE'})
     @JoinColumn({name: 'training_id'})
     training: Training;
 

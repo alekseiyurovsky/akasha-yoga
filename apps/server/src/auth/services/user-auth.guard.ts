@@ -29,7 +29,6 @@ export class UserAuthGuard implements CanActivate {
         } catch {
             throw new UnauthorizedException();
         }
-        console.log('payload', payload);
         if (!payload?.id || payload.id !== request.params.id) {
             throw new UnauthorizedException('User not authorized to perform such action');
         }

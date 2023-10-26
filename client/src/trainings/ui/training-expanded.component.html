@@ -1,0 +1,32 @@
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title title is-3">
+      {{training.name}}
+    </p>
+  </header>
+  <div class="card-image">
+    <figure class="image is-4by3" [style.background-image]="bgImage"></figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4">{{authorName}}</p>
+        <p class="subtitle is-6">Treneris</p>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>{{training.description}}</p>
+      <p>Maksimālais apmeklētāju skaits - {{training.max_count}}</p>
+      <p>Nodarbības ilgums - {{training.duration}}</p>
+      <br>
+      <time datetime="2016-1-1">{{training.date_added | date}}</time>
+    </div>
+  </div>
+  <footer class="card-footer" *ngIf="dataService.isAdmin()">
+    <button class="button is-danger" (click)="delete()">Izdēst</button>
+    <button class="button is-warning" (click)="edit()">Rediģēt</button>
+  </footer>
+</div>
+<ng-template adHost></ng-template>
+

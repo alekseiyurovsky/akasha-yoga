@@ -2,7 +2,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Izveidot Treniņu</p>
+      <p class="modal-card-title">Rediģēt Treniņu</p>
       <button (click)="dismiss()" aria-label="close" class="delete"></button>
     </header>
     <section class="modal-card-body">
@@ -22,7 +22,7 @@
                 <i class="fas fa-upload"></i>
               </span>
               <span class="file-label">
-                Izvelēties treniņa attēlu
+                Izvelēties <b>jaunu</b> treniņa attēlu
               </span>
               <span *ngIf="file" class="file-name">
                 {{file.name}}

@@ -1,0 +1,16 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Idzēst treniņu</p>
+      <button class="delete" aria-label="close" (click)="apply(false)"></button>
+    </header>
+    <section class="modal-card-body">
+      Lūdzu, apstipriniet šī treniņa dzēšanu:
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-danger" (click)="delete()">Idzēst</button>
+      <button class="button" (click)="apply(false)">Atcelt</button>
+    </footer>
+  </div>
+</div>

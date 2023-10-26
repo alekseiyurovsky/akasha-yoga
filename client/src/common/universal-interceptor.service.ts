@@ -10,7 +10,6 @@ export class UniversalInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<unknown>, next: HttpHandler) {
         const token = this.httpService.getToken();
-        console.log('pew pew pew intercepted', token);
         req = req.clone({
             url: req.url,
             setHeaders: {

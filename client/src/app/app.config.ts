@@ -31,7 +31,6 @@ function initializeAppFactory(
     httpService.setToken(token);
 
     const user = await firstValueFrom(httpService.get<User>(`api/users/${(tokenService.getDecodeToken() as UserToken).id}`));
-    console.log(user);
     dataService.setUser(user);
     resolve(true);
   });

@@ -51,6 +51,10 @@ export class TrainingsService {
     return this.trainingRepository.update({id}, {...patchTrainingDetails});
   }
 
+  public deleteTraining(id: number) {
+    return this.trainingRepository.delete({id});
+  }
+
   public async uploadPic(
     pic: Express.Multer.File,
     id: number,
@@ -64,7 +68,7 @@ export class TrainingsService {
     const { data: imageData } = await firstValueFrom(
       this.httpService
         .post(
-          `https://api.imgbb.com/1/upload?expiration=600&key=f256a8d21dd1702a0f500d163123f512`,
+          `https://api.imgbb.com/1/upload?expiration=604800&key=f256a8d21dd1702a0f500d163123f512`,
           formData,
         )
     );
