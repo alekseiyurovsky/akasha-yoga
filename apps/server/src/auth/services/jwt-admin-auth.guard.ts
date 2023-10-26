@@ -13,8 +13,6 @@ export class JwtAdminAuthGuard extends JwtAuthGuard {
 
     override checkPayload(payload) {
         if (!payload?.roleId || !this.ADMIN_ROLES.includes(payload.roleId)) {
-            console.log('guard triggered: ', payload);
-            console.log('roleId type: ', typeof payload.roleId);
             throw new UnauthorizedException('Privileges missing!');
         }
         return payload;

@@ -5,6 +5,7 @@ import {AdDirective} from '../common/adhost.directive';
 import {DataService} from '../common/data.service';
 import {CreateTrainingPopupComponent} from './ui/create-training-popup.component';
 import {TrainingCardComponent} from './ui/training-card.component';
+import {TrainingView} from "../common/model/Training";
 
 @Component({
   selector: 'fse-trainings',
@@ -17,7 +18,7 @@ export class TrainingsComponent implements OnInit {
 
   @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
-  public trainings: any[] = [];
+  public trainings: TrainingView[];
 
   constructor(
     public dataService: DataService,

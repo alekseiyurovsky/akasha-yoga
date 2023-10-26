@@ -1,4 +1,31 @@
 @import './../../styles/variables';
 
 :host {
+  flex-basis: 320px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  &:hover {
+    opacity: 0.5;
+    transform: scale3d(105%, 105%, 105%);
+  }
+}
+
+.card {
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid #bbbbbb;
+}
+
+.card-image {
+  border-bottom: 1px solid #bbbbbb;
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    border-radius: 0;
+  }
 }

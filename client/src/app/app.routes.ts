@@ -11,6 +11,7 @@ import {inject} from "@angular/core";
 import {DataService} from "../common/data.service";
 import {userGuardFn} from "./util/guards";
 import {userSchedulesResolver} from "./util/resolvers";
+import {TrainingView} from "../common/model/Training";
 
 export const appRoutes: Route[] = [
     {path: '', component: HomeComponent},
@@ -19,7 +20,7 @@ export const appRoutes: Route[] = [
     {path: 'blog', component: BlogComponent},
     {path: 'news', component: NewsComponent},
     {path: 'trainings', component: TrainingsComponent, resolve: {
-      trainings: () => inject(HttpService).get('api/trainings')
+      trainings: () => inject(HttpService).get<TrainingView[]>('api/trainings')
       }},
     {path: 'about', component: AboutComponent},
     {
