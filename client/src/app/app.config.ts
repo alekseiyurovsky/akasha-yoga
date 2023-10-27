@@ -1,5 +1,6 @@
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {APP_INITIALIZER, ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideRouter, withEnabledBlockingInitialNavigation} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {firstValueFrom} from 'rxjs';
@@ -38,6 +39,7 @@ function initializeAppFactory(
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideRouter(appRoutes, withEnabledBlockingInitialNavigation()),
     importProvidersFrom(HttpClientModule),
     {provide: HTTP_INTERCEPTORS, useClass: UniversalInterceptor, multi: true},

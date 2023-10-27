@@ -1,1 +1,15 @@
-<full-calendar [options]="calendarOptions"></full-calendar>
+<div class="header">
+  <div class="btn-group">
+    <label class="checkbox">
+      <input type="checkbox" [(ngModel)]="showMine">
+      Radīt tikai manus pierakstus
+    </label>
+  </div>
+
+  <div class="btn-group" *ngIf="dataService.isAdmin()">
+    <button class="fc-today-button btn btn-secondary" (click)="create()">Pievienot nodarbību</button>
+    <button class="fc-today-button btn btn-secondary" (click)="create()">Manas nodarbības</button>
+  </div>
+</div>
+<full-calendar #calendar [options]="calendarOptions"></full-calendar>
+<ng-template adHost></ng-template>
