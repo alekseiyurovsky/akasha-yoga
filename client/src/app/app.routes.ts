@@ -12,6 +12,9 @@ import {TrainingExpandedComponent} from '../trainings/ui/training-expanded.compo
 import {UserComponent} from '../user/user.component';
 import {userGuardFn} from './util/guards';
 import {userSchedulesResolver} from './util/resolvers';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {Schedule} from "../../../apps/server/src/app/typeorm/entities/Schedule";
+import {ScheduleItemComponent} from "../schedule/ui/schedule-item.component";
 
 export const appRoutes: Route[] = [
   {path: '', component: HomeComponent},
@@ -21,7 +24,15 @@ export const appRoutes: Route[] = [
     component: ScheduleComponent,
     canActivate: [userGuardFn],
     resolve: {
-      schedules: () => inject(HttpService).get('api/schedules')
+      schedules: () => inject(HttpService).get<Schedule[]>('api/schedules')
+    }
+  },
+  {
+    path: 'schedule/:id',
+    component: ScheduleItemComponent,
+    canActivate: [userGuardFn],
+    resolve: {
+      schedule: (route: ActivatedRouteSnapshot) => inject(HttpService).get<Training>(`api/schedules/${route.paramMap.get('id')}`)
     }
   },
   {path: 'blog', component: BlogComponent},

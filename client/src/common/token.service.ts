@@ -29,7 +29,7 @@ export class JWTTokenService {
     public getDecoded(): UserToken {
         this.decodeToken();
         return {
-            id: +this.decodedToken['id'],
+            id: this.decodedToken['id'],
             email: this.decodedToken['email'],
             name: this.decodedToken['name'],
             surname: this.decodedToken['surname']

@@ -10,62 +10,75 @@ import {HttpService} from '../../common/http.service';
 import {Training} from '../../common/model/Training';
 import {DynamicPopupContainerComponent} from '../../common/ui/dynamic-popup-container.component';
 import {getFormattedStorageDateString} from '../utils/getFormattedStorageDateString';
+import {Schedule} from "../../../../apps/server/src/app/typeorm/entities/Schedule";
+import {catchError, firstValueFrom, of, take} from "rxjs";
 
 @Component({
-  selector: 'fse-create-training-popup',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgxMaterialTimepickerModule, MatDatepickerModule, MatNativeDateModule],
-  providers: [HttpClient],
-  templateUrl: './create-schedule-popup.component.html',
-  styleUrls: ['./create-schedule-popup.component.scss']
+    selector: 'fse-create-training-popup',
+    standalone: true,
+    imports: [CommonModule, FormsModule, NgxMaterialTimepickerModule, MatDatepickerModule, MatNativeDateModule],
+    providers: [HttpClient],
+    templateUrl: './create-schedule-popup.component.html',
+    styleUrls: ['./create-schedule-popup.component.scss']
 })
 export class CreateSchedulePopupComponent extends DynamicPopupContainerComponent {
 
-  public error = '';
-  public readonly minDate = new Date();
+    public error = '';
+    public readonly minDate = new Date();
 
-  public trainings: Training[] = [];
-  public selectedTrainingsId: number;
-  public selectedDate: Date;
-  public selectedTime = '';
+    public trainings: Training[] = [];
+    public selectedTrainingsId: number;
+    public selectedDate: Date;
+    public selectedTime = '';
 
 
-  constructor(
-    private httpService: HttpService,
-    private dataService: DataService
-  ) {
-    super();
-  }
-
-  public onTimeSet(time: string) {
-    console.log('time selected: ', time);
-    this.selectedTime = time;
-  }
-
-  public onDateInput({value}: MatDatepickerInputEvent<Date>) {
-    console.log('date selected: ', value);
-    this.selectedDate = value as Date;
-  }
-
-  public create() {
-
-    console.log(this.selectedDate);
-    console.log(this.selectedTrainingsId);
-    console.log(this.selectedTime);
-
-    this.error = '';
-    if (!this.validate()) {
-      return;
+    constructor(
+        private httpService: HttpService,
+        private dataService: DataService
+    ) {
+        super();
     }
-    console.log('chpok');
-    console.log('constructedDate: ', getFormattedStorageDateString(this.selectedDate, this.selectedTime));
-  }
 
-  private validate(): boolean {
-    if (!this.selectedTrainingsId || !this.selectedTime || !this.selectedDate) {
-      this.error = 'Visi laukumi nav aizpildīti';
-      return false;
+    public onTimeSet(time: string) {
+        this.selectedTime = time;
     }
-    return true;
-  }
+
+    public onDateInput({value}: MatDatepickerInputEvent<Date>) {
+        this.selectedDate = value as Date;
+    }
+
+    public async create() {
+        this.error = '';
+        if (!this.validate()) {
+            return;
+        }
+
+        const result: Schedule | null = await firstValueFrom(
+            this.httpService.post<Schedule>('api/schedules', {
+                date: getFormattedStorageDateString(this.selectedDate, this.selectedTime),
+                training_id: this.selectedTrainingsId,
+                author_id: this.dataService.getUser().id
+            }).pipe(
+                take(1),
+                catchError(err => {
+                    this.error = err.error.message;
+                    return of(null)
+                })
+            )
+        );
+
+        if (!result) {
+            return;
+        }
+
+        await this.apply();
+    }
+
+    private validate(): boolean {
+        if (!this.selectedTrainingsId || !this.selectedTime || !this.selectedDate) {
+            this.error = 'Visi laukumi nav aizpildīti';
+            return false;
+        }
+        return true;
+    }
 }

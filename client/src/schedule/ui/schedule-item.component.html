@@ -1,0 +1,38 @@
+<div class="card">
+    <header class="card-header">
+        <p class="card-header-title title is-3">
+            {{schedule.training.name}}
+        </p>
+    </header>
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content">
+                <p class="title is-4">{{authorName}}</p>
+                <p class="subtitle is-6">Treneris</p>
+            </div>
+        </div>
+
+        <div class="content" *ngIf="isCurrentUserApplied()">
+            <div *ngIf="isApproved()" class="notification is-success">
+                Jūsu pieteikums uz nodarbību ir apstiprināts!
+            </div>
+            <div *ngIf="isUnapproved()" class="notification is-warning">
+                Jūsu pieteikums uz nodarbību ir saņemts un gaidā apstiprinājumu!
+            </div>
+            <button class="button is-danger" (click)="cancelApplication()">Atteikties</button>
+        </div>
+
+        <div class="content">
+            <p [routerLink]="['/trainings', schedule.training.id]" class="link">Informacija par treniņu</p>
+            <p>Pieteikumu skaits - {{getCurrentCount()}}/{{schedule.training.max_count}}</p>
+            <p>Nodarbības ilgums - {{schedule.training.duration}} minutes</p>
+            <br>
+            <time datetime="2016-1-1">Nodarbība notiks <b>{{schedule.date | date: 'dd/MM/yyyy - HH:mm'}}</b></time>
+        </div>
+    </div>
+    <footer class="card-footer" *ngIf="dataService.isAdmin()">
+        <button class="button is-danger">Izdēst</button>
+        <button class="button is-warning">Rediģēt</button>
+    </footer>
+</div>
+<ng-template adHost></ng-template>

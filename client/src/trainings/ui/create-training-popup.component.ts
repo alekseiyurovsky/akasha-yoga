@@ -7,6 +7,7 @@ import {catchError, firstValueFrom, of, take} from 'rxjs';
 import {DataService} from '../../common/data.service';
 import {HttpService} from '../../common/http.service';
 import {DynamicPopupContainerComponent} from '../../common/ui/dynamic-popup-container.component';
+import {Training} from "../../common/model/Training";
 
 @Component({
   selector: 'fse-create-training-popup',
@@ -46,8 +47,8 @@ export class CreateTrainingPopupComponent extends DynamicPopupContainerComponent
 
   async onSubmit() {
     const values = this.trainingForm.getRawValue();
-    const result: any = await firstValueFrom(
-      this.httpService.post<unknown>('api/trainings', {
+    const result: Training | null = await firstValueFrom(
+      this.httpService.post<Training>('api/trainings', {
         'name': values['name'],
         'description': values['description'],
         'duration': values['duration'],
@@ -59,7 +60,7 @@ export class CreateTrainingPopupComponent extends DynamicPopupContainerComponent
       }))
     );
 
-    if(!result.id || !this.file) {
+    if(!result?.id || !this.file) {
       return;
     }
 
@@ -67,7 +68,7 @@ export class CreateTrainingPopupComponent extends DynamicPopupContainerComponent
     formData.append('file', this.file);
     this.file = null;
 
-    this.httpService.post<unknown>(`api/trainings/${result.id}/upload`, formData).pipe(
+    this.httpService.post<unknown>(`api/trainings/${result?.id}/upload`, formData).pipe(
       take(1)
     ).subscribe(
       resp => {

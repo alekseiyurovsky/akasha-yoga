@@ -9,7 +9,7 @@ export const calenderOptions: CalendarOptions = {
   locale: lvLocale,
   initialView: 'listMonth',
   headerToolbar: {
-    center: 'dayGridMonth,listMonth'
+    center: 'listDay,listWeek,listMonth'
   },
   plugins: [dayGridPlugin, bootstrap5Plugin, listPlugin],
   themeSystem: 'bootstrap5',
@@ -22,6 +22,8 @@ export const calenderOptions: CalendarOptions = {
     month: 'mēnesis',
     week: 'nedēļa',
     day: 'diena',
-    list: 'saraksts'
+    listMonth: 'mēneši',
+    listWeek: 'nedēļas',
+    listDay: 'dienas'
   }
 };

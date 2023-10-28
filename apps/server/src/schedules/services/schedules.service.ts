@@ -18,6 +18,8 @@ export class SchedulesService {
             },
             training: {
                 max_count: true,
+                duration: true,
+                image_url: true,
                 name: true,
                 id: true
             }
@@ -56,7 +58,7 @@ export class SchedulesService {
             unapproved = await this.userService.findMany(JSON.parse(unapproved_entrants));
         }
 
-        return {schedule, approved, unapproved};
+        return {...schedule, approved, unapproved};
     }
 
     public createSchedule(scheduleDetails: CreateScheduleDto) {
@@ -67,7 +69,7 @@ export class SchedulesService {
         id: number,
         {unapproved_entrants, approved_entrants, ...otherDetails}: Partial<PatchScheduleDto>
     ) {
-        let details: { unapproved_entrants?: string, approved_entrants?: string } = {};
+        const details: { unapproved_entrants?: string, approved_entrants?: string } = {};
         if (unapproved_entrants) {
             details.unapproved_entrants = JSON.stringify(unapproved_entrants)
         }

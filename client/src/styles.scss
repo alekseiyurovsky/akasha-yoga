@@ -21,3 +21,26 @@ body {
 .timepicker-overlay {
   z-index: 99999 !important;
 }
+
+full-calendar {
+  .fc-event {
+    &.full {
+      .fc-list-event-dot {
+        border-color: #ff0000;
+      }
+    }
+
+    &.approved {
+      .fc-list-event-dot {
+        border-color: #48c78e;
+      }
+    }
+
+    &.unapproved {
+      .fc-list-event-dot {
+        border-color: #ffe08a;
+      }
+    }
+  }
+
+}
