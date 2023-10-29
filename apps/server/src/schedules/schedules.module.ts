@@ -6,10 +6,11 @@ import {User} from '../app/typeorm/entities/User';
 import {UsersService} from '../users/services/users.service';
 import {SchedulesController} from './controllers/schedules.controller';
 import {SchedulesService} from './services/schedules.service';
+import {JwtService} from "@nestjs/jwt";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Training, Schedule])],
   controllers: [SchedulesController],
-  providers: [SchedulesService, UsersService]
+  providers: [SchedulesService, UsersService, JwtService]
 })
 export class SchedulesModule {}

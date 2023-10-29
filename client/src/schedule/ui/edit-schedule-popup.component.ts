@@ -18,13 +18,15 @@ import {Schedule} from "../../common/model/Schedule";
     standalone: true,
     imports: [CommonModule, FormsModule, NgxMaterialTimepickerModule, MatDatepickerModule, MatNativeDateModule],
     providers: [HttpClient],
-    templateUrl: './create-schedule-popup.component.html',
-    styleUrls: ['./create-schedule-popup.component.scss']
+    templateUrl: './edit-schedule-popup.component.html',
+    styleUrls: ['./edit-schedule-popup.component.scss']
 })
-export class CreateSchedulePopupComponent extends DynamicPopupContainerComponent {
+export class EditSchedulePopupComponent extends DynamicPopupContainerComponent<Schedule> {
 
     public error = '';
     public readonly minDate = new Date();
+
+    public schedule: Schedule;
 
     public trainings: Training[] = [];
     public selectedTrainingsId: number;
@@ -39,6 +41,12 @@ export class CreateSchedulePopupComponent extends DynamicPopupContainerComponent
         super();
     }
 
+    public setInputs() {
+        this.selectedTrainingsId = this.schedule.training.id;
+        this.selectedDate = new Date(this.schedule.date);
+        this.selectedTime = `${this.selectedDate.getHours()}:${this.selectedDate.getMinutes()}`
+    }
+
     public onTimeSet(time: string) {
         this.selectedTime = time;
     }
@@ -47,17 +55,16 @@ export class CreateSchedulePopupComponent extends DynamicPopupContainerComponent
         this.selectedDate = value as Date;
     }
 
-    public async create() {
+    public async edit() {
         this.error = '';
         if (!this.validate()) {
             return;
         }
 
         const result: Schedule | null = await firstValueFrom(
-            this.httpService.post<Schedule>('api/schedules', {
+            this.httpService.patch<Schedule>(`api/schedules/${this.schedule.id}`, {
                 date: getFormattedStorageDateString(this.selectedDate, this.selectedTime),
-                training_id: this.selectedTrainingsId,
-                author_id: this.dataService.getUser().id
+                training_id: this.selectedTrainingsId
             }).pipe(
                 take(1),
                 catchError(err => {
@@ -71,7 +78,7 @@ export class CreateSchedulePopupComponent extends DynamicPopupContainerComponent
             return;
         }
 
-        await this.apply();
+        await this.apply(result);
     }
 
     private validate(): boolean {

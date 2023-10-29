@@ -65,6 +65,10 @@ export class SchedulesService {
         return this.scheduleRepository.save(scheduleDetails);
     }
 
+    public deleteSchedule(id: number) {
+        return this.scheduleRepository.delete({id});
+    }
+
     public async updateSchedule(
         id: number,
         {unapproved_entrants, approved_entrants, ...otherDetails}: Partial<PatchScheduleDto>

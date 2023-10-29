@@ -3,13 +3,13 @@ import {Component} from '@angular/core';
 import {DynamicPopupContainerComponent} from '../../common/ui/dynamic-popup-container.component';
 
 @Component({
-    selector: 'fse-cancel-application-popup',
+    selector: 'fse-delete-schedule-popup',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './confirm-cancel-popup.component.html',
-    styleUrls: ['./confirm-cancel-popup.component.scss']
+    templateUrl: './confirm-delete-popup.component.html',
+    styleUrls: ['./confirm-delete-popup.component.scss']
 })
-export class ConfirmCancelApplicationPopupComponent extends DynamicPopupContainerComponent<boolean> {
+export class ConfirmDeletePopupComponent extends DynamicPopupContainerComponent<boolean> {
 
     constructor() {
         super();

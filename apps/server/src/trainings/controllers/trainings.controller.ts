@@ -51,6 +51,7 @@ export class TrainingsController {
     return this.trainingsService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async deleteTrainingById(
     @Param('id', ParseIntPipe) id: number,

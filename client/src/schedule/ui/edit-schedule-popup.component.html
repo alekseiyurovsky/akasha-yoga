@@ -1,0 +1,45 @@
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Izmaiņīt Nodarbību</p>
+      <button (click)="dismiss()" aria-label="close" class="delete"></button>
+    </header>
+    <section class="modal-card-body">
+      <div *ngIf="error.length" class="notification is-danger">
+        {{error}}
+      </div>
+      <div class="input-container">
+        <div class="label">Izvelēties treniņu</div>
+        <div class="select">
+          <select [(ngModel)]="selectedTrainingsId">
+            <option *ngFor="let training of trainings" [value]="training.id">{{training.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-container">
+        <div class="label">Izvelēties nodarbības datumu</div>
+        <input
+          class="input"
+          matInput
+          [value]="selectedDate"
+          [min]="minDate"
+          [matDatepicker]="datePicker"
+          (dateInput)="onDateInput($event)"
+        >
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </div>
+      <div class="input-container">
+        <div class="label">Izvelēties nodarbības laiku</div>
+        <input class="input" type="text" [value]="selectedTime" [ngxTimepicker]="timePicker" [format]="24">
+        <ngx-material-timepicker-toggle [for]="timePicker"></ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #timePicker [disableAnimation]="true" (timeSet)="onTimeSet($event)"></ngx-material-timepicker>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="edit()">Saglabāt</button>
+      <button (click)="dismiss()" class="button">Atcelt</button>
+    </footer>
+  </div>
+</div>

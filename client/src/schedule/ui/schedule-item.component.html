@@ -21,7 +21,14 @@
             </div>
             <button class="button is-danger" (click)="cancelApplication()">Atteikties</button>
         </div>
-
+        <div class="content" *ngIf="!isCurrentUserApplied() && !isFull()">
+            <button class="button is-success" (click)="apply()">Pieteikties</button>
+        </div>
+        <div class="content" *ngIf="isFull() && !isCurrentUserApplied()">
+            <div class="notification is-warning">
+                Pieteikumu skaits sasniedzis maksimāli pieļaujamo dalībnieku skaitu šī treniņam.
+            </div>
+        </div>
         <div class="content">
             <p [routerLink]="['/trainings', schedule.training.id]" class="link">Informacija par treniņu</p>
             <p>Pieteikumu skaits - {{getCurrentCount()}}/{{schedule.training.max_count}}</p>
@@ -31,8 +38,8 @@
         </div>
     </div>
     <footer class="card-footer" *ngIf="dataService.isAdmin()">
-        <button class="button is-danger">Izdēst</button>
-        <button class="button is-warning">Rediģēt</button>
+        <button class="button is-danger" (click)="delete()">Izdēst</button>
+        <button class="button is-warning" (click)="edit()">Rediģēt</button>
     </footer>
 </div>
 <ng-template adHost></ng-template>

@@ -8,7 +8,11 @@ import {HttpService} from "../../common/http.service";
 import {Schedule} from "../../common/model/Schedule";
 import {User} from "../../common/model/User";
 import {ConfirmCancelApplicationPopupComponent} from "./confirm-cancel-popup.component";
-import {take} from "rxjs";
+import {firstValueFrom, take} from "rxjs";
+import {ConfirmApplyPopupComponent} from "./confirm-apply-popup.component";
+import {Training} from "../../common/model/Training";
+import {EditSchedulePopupComponent} from "./edit-schedule-popup.component";
+import {ConfirmDeletePopupComponent} from "./confirm-delete-popup.component";
 
 
 @Component({
@@ -52,12 +56,36 @@ export class ScheduleItemComponent {
     }
 
     public getCurrentCount(): number {
-        console.log(this.getTotalUsers())
         return this.getTotalUsers().length;
     }
 
     private getTotalUsers(): Pick<User, 'name' | 'surname' | 'id'>[] {
         return [...this.schedule.approved ?? [], ...this.schedule.unapproved ?? []];
+    }
+
+    public apply(): void {
+        const viewContainerRef = this.adHost.viewContainerRef;
+        viewContainerRef.clear();
+        const componentRef = viewContainerRef.createComponent<ConfirmApplyPopupComponent>(ConfirmApplyPopupComponent);
+        componentRef.instance.promise
+            .then(confirmed => {
+                if(confirmed) {
+
+                    const unapproved = this.schedule.unapproved?.map(applicant => applicant.id) ?? [];
+
+                    this.httpService.patch<Schedule>(`api/schedules/${this.schedule.id}`, {
+                        unapproved_entrants: [...unapproved, this.userId]
+                    })
+                        .pipe(take(1))
+                        .subscribe(resp => {
+                            this.schedule.unapproved = [...resp.unapproved];
+                        })
+                }
+            })
+            .finally(() => {
+                viewContainerRef.clear();
+            });
+
     }
 
     public cancelApplication(): void {
@@ -79,17 +107,45 @@ export class ScheduleItemComponent {
                     this.httpService.patch<Schedule>(`api/schedules/${this.schedule.id}`, {...payload})
                         .pipe(take(1))
                         .subscribe(resp => {
-                            if (resp.approved) {
-                                this.schedule.approved = [...resp.approved];
-                            }
-                            if (resp.unapproved) {
-                                this.schedule.unapproved = [...resp.unapproved];
-                            }
+                            this.schedule = {...resp};
                         })
                 }
             })
             .finally(() => {
                 viewContainerRef.clear();
             });
+    }
+
+    public delete(): void {
+        const viewContainerRef = this.adHost.viewContainerRef;
+        viewContainerRef.clear();
+        const componentRef = viewContainerRef.createComponent<ConfirmDeletePopupComponent>(ConfirmDeletePopupComponent);
+        componentRef.instance.promise
+            .then(confirmed => {
+                if(confirmed) {
+                    this.httpService.delete<Schedule>(`api/schedules/${this.schedule.id}`)
+                        .pipe(take(1))
+                        .subscribe(async resp => {
+                            await this.router.navigate(['/schedule'])
+                        })
+                }
+            })
+            .finally(() => {
+                viewContainerRef.clear();
+            });
+
+    }
+
+    public async edit(): Promise<void> {
+        const viewContainerRef = this.adHost.viewContainerRef;
+        viewContainerRef.clear();
+        const trainings = await firstValueFrom(this.httpService.get<Training[]>('api/trainings'));
+        const componentRef = viewContainerRef.createComponent<EditSchedulePopupComponent>(EditSchedulePopupComponent);
+        componentRef.instance.trainings = trainings;
+        componentRef.instance.schedule = this.schedule;
+        componentRef.instance.setInputs();
+        componentRef.instance.promise
+            .then(result => this.schedule = {...result})
+            .finally(() => viewContainerRef.clear());
     }
 }

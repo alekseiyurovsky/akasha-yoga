@@ -20,7 +20,7 @@ import {EventSourceInput} from "@fullcalendar/core";
     templateUrl: './schedule.component.html',
     styleUrls: ['./schedule.component.scss']
 })
-export class ScheduleComponent implements AfterViewInit {
+export class ScheduleComponent {
 
     @ViewChild('calendar', {static: true}) calendarComponent: FullCalendarComponent;
     @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
@@ -70,12 +70,6 @@ export class ScheduleComponent implements AfterViewInit {
 
     public showAll(): void {
         this.reloadEvents(this.calendarOptions.events);
-    }
-
-    public ngAfterViewInit(): void {
-        console.log('hi')
-        // const api = this.calendarComponent?.getApi();
-        // api.addEventSource({events: this.parsedEvents});
     }
 
     public async create(): Promise<void> {

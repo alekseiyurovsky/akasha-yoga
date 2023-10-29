@@ -1,0 +1,32 @@
+.modal-card {
+  top: 30%;
+}
+
+.modal-card-body {
+  .select {
+    select {
+      width: 200px;
+    }
+  }
+
+  .input {
+    width: 200px;
+  }
+
+  .input-container {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  mat-datepicker-toggle {
+    position: absolute;
+    left: 155px;
+    top: 29px;
+  }
+
+  ngx-material-timepicker-toggle {
+    position: absolute;
+    left: 160px;
+    top: 36px;
+  }
+}

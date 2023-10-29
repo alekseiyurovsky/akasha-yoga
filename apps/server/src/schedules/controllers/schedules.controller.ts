@@ -1,7 +1,8 @@
-import {Body, Controller, Get, Param, ParseIntPipe, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards} from '@nestjs/common';
 import {CreateScheduleDto} from '../dtos/CreateSchedule.dto';
 import {PatchScheduleDto} from '../dtos/PatchSchedule.dto';
 import {SchedulesService} from '../services/schedules.service';
+import {JwtAuthGuard} from "../../auth/services/jwt-auth.guard";
 
 @Controller('schedules')
 export class SchedulesController {
@@ -20,6 +21,14 @@ export class SchedulesController {
   @Post()
   createSchedule(@Body() createScheduleDto: CreateScheduleDto) {
     return this.schedulesService.createSchedule(createScheduleDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  async deleteTrainingById(
+      @Param('id', ParseIntPipe) id: number,
+  ): Promise<void> {
+    await this.schedulesService.deleteSchedule(id);
   }
 
   @Patch(':id')
