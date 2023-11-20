@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AdDirective} from '../../common/adhost.directive';
 import {DataService} from '../../common/data.service';
 import {Training} from '../../common/model/Training';
-import {CreateTrainingPopupComponent} from './create-training-popup.component';
 import {DeleteTrainingPopupComponent} from './delete-training-popup.component';
 import {EditTrainingPopupComponent} from './edit-training-popup.component';
 

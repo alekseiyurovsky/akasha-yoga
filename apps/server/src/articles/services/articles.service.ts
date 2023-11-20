@@ -9,6 +9,11 @@ import {PatchArticleDto} from '../dtos/PatchArticle.dto';
 export class ArticlesService {
   constructor(@InjectRepository(Article) private articleRepository: Repository<Article>) {}
 
+  public createArticle(articleDetails: CreateArticleDto) {
+    const article = this.articleRepository.create(articleDetails);
+    return this.articleRepository.save(article);
+  }
+
   public findArticles() {
     return this.articleRepository.find({
       select: {
@@ -32,11 +37,6 @@ export class ArticlesService {
       },
       relations: ['author']
     });
-  }
-
-  public createArticle(articleDetails: CreateArticleDto) {
-    const article = this.articleRepository.create(articleDetails);
-    return this.articleRepository.save(article);
   }
 
   public updateArticle(id: number, patchArticleDetails: Partial<PatchArticleDto>) {

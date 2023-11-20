@@ -10,20 +10,11 @@ export class HttpService {
   private jwt = '';
   private baseUrl = 'http://localhost:3000/'
 
-  constructor(private client: HttpClient) {
-  }
+  constructor(private client: HttpClient) {}
 
-  setToken(token: string) {
-    this.jwt = token;
-  }
-
-  getToken(): string {
-    return this.jwt;
-  }
-
-  public url(url: string): string {
-    return `${this.baseUrl}${url}`;
-  }
+  public setToken(token: string) {this.jwt = token}
+  public getToken(): string {return this.jwt}
+  public url(url: string): string {return `${this.baseUrl}${url}`}
 
   public get<T>(url: string, body: any = {}, params: { [param: string]: any } = {}, options?: any): Observable<T> {
     return this.request<T>('get', url, body, params, options);

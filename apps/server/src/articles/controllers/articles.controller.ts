@@ -8,14 +8,10 @@ export class ArticlesController {
   constructor(private articlesService: ArticlesService) {}
 
   @Get()
-  getArticles() {
-    return this.articlesService.findArticles();
-  }
+  getArticles() { return this.articlesService.findArticles(); }
 
   @Get(':id')
-  getArticle(@Param('id', ParseIntPipe) id: number) {
-    return this.articlesService.findOne(id);
-  }
+  getArticle(@Param('id', ParseIntPipe) id: number) { return this.articlesService.findOne(id);}
 
   @Post()
   createArticle(@Body() createArticleDto: CreateArticleDto) {

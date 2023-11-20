@@ -5,25 +5,18 @@ import {User} from './User';
 export class Announcement {
     @PrimaryGeneratedColumn({type: 'bigint'})
     id: number;
-
     @Column()
     title: string;
-
     @Column()
     text: string;
-
     @Column({nullable: true})
     image_url: string;
-
     @Column()
     priority: number;
-
     @CreateDateColumn()
     date_added: string;
-
     @Column()
     author_id: number;
-
     @ManyToOne(() => User, (User) => User.id)
     @JoinColumn({name: 'author_id'})
     author: User;

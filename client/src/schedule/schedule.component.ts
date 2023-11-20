@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import {firstValueFrom} from 'rxjs';
@@ -11,7 +11,7 @@ import {CreateSchedulePopupComponent} from './ui/create-schedule-popup.component
 import {calenderOptions} from './utils/calenderOptions';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Schedule} from "../common/model/Schedule";
-import {EventSourceInput} from "@fullcalendar/core";
+import {CalendarOptions, EventSourceInput} from "@fullcalendar/core";
 
 @Component({
     selector: 'fse-schedule',
@@ -25,13 +25,9 @@ export class ScheduleComponent {
     @ViewChild('calendar', {static: true}) calendarComponent: FullCalendarComponent;
     @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
-    public calendarOptions = {
-        ...calenderOptions,
-        events: (this.prepareEvents(this.route.snapshot.data['schedules']) as any),
-        eventClick: this.onEventClick.bind(this)
-    };
+    public calendarOptions;
 
-    private readonly userId = this.dataService.getUser().id.toString();
+    private userId: string;
 
     constructor(
         public dataService: DataService,
@@ -39,10 +35,15 @@ export class ScheduleComponent {
         private route: ActivatedRoute,
         private router: Router
     ) {
+        this.userId = this.dataService.getUser().id.toString();
+        this.calendarOptions = {
+            ...calenderOptions,
+            events: (this.prepareEvents(this.route.snapshot.data['schedules']) as any),
+            eventClick: this.onEventClick.bind(this)
+        };
     }
 
     public async onEventClick(event: any) {
-        console.log(event)
         await this.router.navigate(['schedule', event.event._def.publicId])
     }
 
@@ -83,7 +84,7 @@ export class ScheduleComponent {
 
     private prepareEvents(events: any[]): unknown[] {
         return events.map((scheduleItem: Schedule) => {
-            const isFull = scheduleItem.training.max_count === [...scheduleItem.approved ?? [], ...scheduleItem.unapproved ?? []].length;
+            const isFull = scheduleItem.training.max_count === [...scheduleItem.    approved ?? [], ...scheduleItem.unapproved ?? []].length;
             return {
                 id: scheduleItem.id,
                 start: scheduleItem.date,

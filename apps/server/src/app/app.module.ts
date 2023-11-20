@@ -6,8 +6,6 @@ import {AnnouncementsModule} from '../announcements/announcements.module';
 import {ArticlesModule} from '../articles/articles.module';
 import {SchedulesModule} from '../schedules/schedules.module';
 import {TrainingsModule} from '../trainings/trainings.module';
-import {AppController} from './app.controller';
-import {AppService} from './app.service';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Announcement} from './typeorm/entities/Announcement';
 import {Article} from './typeorm/entities/Article';
@@ -46,9 +44,7 @@ import {AuthModule} from "../auth/auth.module";
         TrainingsModule,
         SchedulesModule,
         AuthModule
-    ],
-    controllers: [AppController],
-    providers: [AppService],
+    ]
 })
 export class AppModule {
 }

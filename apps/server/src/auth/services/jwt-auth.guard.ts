@@ -17,9 +17,7 @@ export class JwtAuthGuard implements CanActivate {
         if (!token) {
             throw new UnauthorizedException();
         }
-
         let payload;
-
         try {
              payload = await this.jwtService.verifyAsync(
                 token,

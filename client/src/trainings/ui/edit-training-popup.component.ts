@@ -94,6 +94,7 @@ export class EditTrainingPopupComponent extends DynamicPopupContainerComponent<s
     }
 
     if (!this.file) {
+      this.apply();
       return;
     }
 
