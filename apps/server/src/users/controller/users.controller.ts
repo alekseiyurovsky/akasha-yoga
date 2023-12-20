@@ -11,7 +11,6 @@ export class UsersController {
 
     constructor(private userService: UsersService) {}
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     getUsers() {
       return this.userService.findUsers();

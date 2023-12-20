@@ -14,7 +14,7 @@
     <div class="tab" [routerLink]="['/news']">Jaunumi</div>
     <div class="tab" [routerLink]="['/blog']">Blogs</div>
     <div class="tab" [routerLink]="['/trainings']">Treņini</div>
-    <div class="tab" [routerLink]="['/schedule']">Nodarbību grafiks</div>
+    <div class="tab" [routerLink]="['/schedule']" >Nodarbību grafiks</div>
     <ng-template [ngIf]="dataService.isLoggedIn()" [ngIfElse]="loginTab">
       <div class="tab" [routerLink]="['/user']">Kabinets</div>
     </ng-template>

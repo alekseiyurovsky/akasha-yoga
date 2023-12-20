@@ -69,14 +69,11 @@ export class ScheduleItemComponent {
         const componentRef = viewContainerRef.createComponent<ConfirmApplyPopupComponent>(ConfirmApplyPopupComponent);
         componentRef.instance.promise
             .then(confirmed => {
-                if(confirmed) {
-
+                if (confirmed) {
                     const unapproved = this.schedule.unapproved?.map(applicant => applicant.id) ?? [];
-
                     this.httpService.patch<Schedule>(`api/schedules/${this.schedule.id}`, {
                         unapproved_entrants: [...unapproved, this.userId]
-                    })
-                        .pipe(take(1))
+                    }).pipe(take(1))
                         .subscribe(resp => {
                             this.schedule.unapproved = [...resp.unapproved];
                         })
@@ -85,7 +82,6 @@ export class ScheduleItemComponent {
             .finally(() => {
                 viewContainerRef.clear();
             });
-
     }
 
     public cancelApplication(): void {
@@ -94,8 +90,8 @@ export class ScheduleItemComponent {
         const componentRef = viewContainerRef.createComponent<ConfirmCancelApplicationPopupComponent>(ConfirmCancelApplicationPopupComponent);
         componentRef.instance.promise
             .then(confirmed => {
-                if(confirmed) {
-                    const payload: {approved_entrants?: string[], unapproved_entrants?: string[]} = {};
+                if (confirmed) {
+                    const payload: { approved_entrants?: string[], unapproved_entrants?: string[] } = {};
                     if (this.isApproved()) {
                         payload.approved_entrants = this.schedule.approved.map(applicant => applicant.id).filter(id => id !== this.userId);
                         payload.unapproved_entrants = this.schedule.unapproved ? this.schedule.unapproved.map(applicant => applicant.id) : [];
@@ -122,7 +118,7 @@ export class ScheduleItemComponent {
         const componentRef = viewContainerRef.createComponent<ConfirmDeletePopupComponent>(ConfirmDeletePopupComponent);
         componentRef.instance.promise
             .then(confirmed => {
-                if(confirmed) {
+                if (confirmed) {
                     this.httpService.delete<Schedule>(`api/schedules/${this.schedule.id}`)
                         .pipe(take(1))
                         .subscribe(async resp => {

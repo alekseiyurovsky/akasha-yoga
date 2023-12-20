@@ -35,8 +35,7 @@ export class EditSchedulePopupComponent extends DynamicPopupContainerComponent<S
 
 
     constructor(
-        private httpService: HttpService,
-        private dataService: DataService
+        private httpService: HttpService
     ) {
         super();
     }

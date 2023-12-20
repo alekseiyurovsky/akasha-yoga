@@ -7,6 +7,8 @@ import {CreateScheduleDto} from '../dtos/CreateSchedule.dto';
 import {PatchScheduleDto} from "../dtos/PatchSchedule.dto";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 
+const EMPTY_ENTRANTS = '[]';
+
 @Injectable()
 export class SchedulesService {
 
@@ -48,16 +50,13 @@ export class SchedulesService {
     }
 
     private async getUsersFromSchedule({approved_entrants, unapproved_entrants, ...schedule}: Schedule) {
-        let approved;
-        let unapproved;
-        if (approved_entrants.length > 2) {
+        let approved, unapproved = [];
+        if (approved_entrants !== EMPTY_ENTRANTS) {
             approved = await this.userService.findMany(JSON.parse(approved_entrants));
         }
-
-        if (unapproved_entrants.length > 2) {
+        if (unapproved_entrants !== EMPTY_ENTRANTS) {
             unapproved = await this.userService.findMany(JSON.parse(unapproved_entrants));
         }
-
         return {...schedule, approved, unapproved};
     }
 

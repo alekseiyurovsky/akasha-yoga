@@ -1,7 +1,7 @@
 import {ResolveFn} from "@angular/router";
 import {inject} from "@angular/core";
 import {HttpService} from "../../common/http.service";
-import {JWTTokenService, UserToken} from "../../common/token.service";
+import {JWTService, UserToken} from "../../common/token.service";
 import {LocalStorageService} from "../../common/local-storage.service";
 
 export const userSchedulesResolver: ResolveFn<any> = () => {
@@ -9,7 +9,7 @@ export const userSchedulesResolver: ResolveFn<any> = () => {
     if(!token) {
         return;
     }
-    const tokenService = inject(JWTTokenService);
+    const tokenService = inject(JWTService);
     tokenService.setToken(token);
     if (tokenService.isTokenExpired()) {
         return;

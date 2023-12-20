@@ -30,7 +30,7 @@ export class UsersService {
     public async getUserSchedules(id: number): Promise<Schedule[]> {
         const trainings = await this.scheduleRepository
             .createQueryBuilder('schedule')
-            .where(`date > CURDATE() AND (JSON_CONTAINS(unapproved_entrants, "${id}") OR JSON_CONTAINS(approved_entrants, "${id}"))`)
+            .where(`date > CURDATE() AND (JSON_CONTAINS('unapproved_entrants', "${id}") OR JSON_CONTAINS(approved_entrants, "${id}"))`)
             .getMany();
         return trainings;
     }

@@ -5,7 +5,7 @@ import {User} from "./model/User";
 export type UserToken = Omit<User, 'date_of_birth' | 'about' | 'role'>;
 
 @Injectable({providedIn: 'root'})
-export class JWTTokenService {
+export class JWTService {
 
     private jwtToken = '';
     private decodedToken: { [key: string]: string } = {};
@@ -14,6 +14,10 @@ export class JWTTokenService {
         if (token) {
             this.jwtToken = token;
         }
+    }
+
+    public getToken() {
+        return this.jwtToken;
     }
 
     public decodeToken() {
@@ -41,12 +45,11 @@ export class JWTTokenService {
         return this.decodedToken ? this.decodedToken['exp'] : null;
     }
 
-    isTokenExpired(): boolean {
+    public isTokenExpired(): boolean {
         const expiryTime: string | null = this.getExpiryTime();
-        if (expiryTime) {
-            return ((1000 * +expiryTime) - (new Date()).getTime()) < 5000;
-        } else {
-            return false;
+        if (!expiryTime) {
+            return true;
         }
+        return ((1000 * +expiryTime) - (new Date()).getTime()) < 5000;
     }
 }

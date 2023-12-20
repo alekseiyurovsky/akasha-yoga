@@ -8,13 +8,13 @@ import {DataService} from '../common/data.service';
 import {HttpService} from '../common/http.service';
 import {LocalStorageService} from '../common/local-storage.service';
 import {User} from '../common/model/User';
-import {JWTTokenService, UserToken} from '../common/token.service';
+import {JWTService, UserToken} from '../common/token.service';
 import {UniversalInterceptor} from '../common/universal-interceptor.service';
 import {appRoutes} from './app.routes';
 
 function initializeAppFactory(
   storage: LocalStorageService,
-  tokenService: JWTTokenService,
+  tokenService: JWTService,
   httpService: HttpService,
   dataService: DataService
 ): () => Promise<any> {
@@ -48,7 +48,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: initializeAppFactory,
       multi: true,
-      deps: [LocalStorageService, JWTTokenService, HttpService, DataService]
+      deps: [LocalStorageService, JWTService, HttpService, DataService]
     }
   ]
 };
