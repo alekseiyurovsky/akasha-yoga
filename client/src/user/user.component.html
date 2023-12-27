@@ -49,7 +49,7 @@
             Pašlaik jūs neesat pierakstījušies uz treniņiem.
         </div>
         <div *ngIf="dataService.getSchedules().length">
-            <div *ngFor="let schedule of dataService.getSchedules();">{{schedule}}</div>
+            <full-calendar #calendar [options]="calendarOptions"></full-calendar>
         </div>
     </div>
 </div>

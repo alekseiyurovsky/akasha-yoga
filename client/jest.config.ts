@@ -1,7 +1,16 @@
 /* eslint-disable */
 export default {
   displayName: 'client',
+  coverageReporters: ['clover', 'json', 'lcov', ['text', {skipFull: true}]],
   preset: '../jest.preset.js',
+  coverageThreshold: {
+    global: {
+      branches: 0,
+      functions: 0,
+      lines: 0,
+      statements: 0,
+    },
+  },
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../coverage/client',
   transform: {

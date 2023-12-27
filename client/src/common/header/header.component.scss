@@ -5,29 +5,87 @@ $social-icon-width: 40px;
 
 :host {
   width: 100%;
-  background-color: #ffffffbb;
+  background-color: $bg-color;
   display: block;
   box-shadow: 0 7px 13px -3px rgba(0, 0, 0, 0.46);
   margin-bottom: 10px;
+
+  @include mobile {
+    margin: 0;
+  }
+}
+
+.mobile-collapsable {
+  display: none;
+  width: 100%;
+  position: absolute;
+  background-color: #eae3d2;
+  left: 0;
+  z-index: 1;
+  border: 1px solid #cccccc;
+  border-left: none;
+  border-right: none;
+
+  .tab {
+    padding: 0.5rem 0.25rem;
+  }
+
+  @include mobile {
+    display: block;
+  }
+}
+
+.navbar {
+  padding: 0;
+  display: none;
+  background: none;
+
+  @include mobile {
+    display: flex;
+  }
+
+  .navbar-toggler {
+    border: none;
+    padding: 0;
+  }
 }
 
 .container {
   max-width: $base-width;
   width: 100%;
   margin: 0 auto;
+
 }
 
 .logo {
   width: $img-width;
   cursor: pointer;
   padding-left: calc(#{$social-icon-width} / 2);
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.logo-mobile {
+  display: none;
+  width: 264px;
+  margin: 9px 0;
+
+  @include mobile {
+    display: block;
+  }
 }
 
 .content {
   display: flex;
   justify-content: space-evenly;
-  padding: 36px 0;
+  padding: 12px 0 20px;
   margin: 0;
+
+  @include mobile {
+    padding: 12px;
+  }
 }
 
 .logo-container {
@@ -40,6 +98,10 @@ $social-icon-width: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  @include mobile {
+    display: none;
+  }
 
   .link {
     flex-basis: $social-icon-width;
@@ -62,6 +124,14 @@ $social-icon-width: 40px;
   justify-content: space-between;
   cursor: pointer;
   overflow: visible;
+
+  @include tablet {
+    font-size: 14px;
+  }
+
+  @include mobile {
+    display: none;
+  }
 
   .tab {
     transition: all 0.3s ease-out;

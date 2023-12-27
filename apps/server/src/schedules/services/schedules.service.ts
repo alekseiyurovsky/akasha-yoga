@@ -51,11 +51,11 @@ export class SchedulesService {
 
     private async getUsersFromSchedule({approved_entrants, unapproved_entrants, ...schedule}: Schedule) {
         let approved, unapproved = [];
-        if (approved_entrants !== EMPTY_ENTRANTS) {
-            approved = await this.userService.findMany(JSON.parse(approved_entrants));
+        if (approved_entrants as unknown as number[]) {
+            approved = await this.userService.findMany(approved_entrants as unknown as number[]);
         }
-        if (unapproved_entrants !== EMPTY_ENTRANTS) {
-            unapproved = await this.userService.findMany(JSON.parse(unapproved_entrants));
+        if (unapproved_entrants as unknown as number[]) {
+            unapproved = await this.userService.findMany(unapproved_entrants as unknown as number[]);
         }
         return {...schedule, approved, unapproved};
     }
@@ -70,15 +70,15 @@ export class SchedulesService {
 
     public async updateSchedule(
         id: number,
-        {unapproved_entrants, approved_entrants, ...otherDetails}: Partial<PatchScheduleDto>
+        details: Partial<PatchScheduleDto>
     ) {
-        const details: { unapproved_entrants?: string, approved_entrants?: string } = {};
-        if (unapproved_entrants) {
-            details.unapproved_entrants = JSON.stringify(unapproved_entrants)
-        }
-        if (approved_entrants) {
-            details.approved_entrants = JSON.stringify(approved_entrants)
-        }
-        return this.scheduleRepository.update({id}, {...otherDetails, ...details});
+        // const details: { unapproved_entrants?: string, approved_entrants?: string } = {};
+        // if (unapproved_entrants) {
+        //     details.unapproved_entrants = JSON.stringify(unapproved_entrants)
+        // }
+        // if (approved_entrants) {
+        //     details.approved_entrants = JSON.stringify(approved_entrants)
+        // }
+        return this.scheduleRepository.update({id}, details);
     }
 }

@@ -1,1 +1,9 @@
 $base-width: 1024px;
+$bg-color: #F0ECDFE6;
+
+@mixin mobile {
+  @media (max-width: 639px) { @content; }
+}
+@mixin tablet {
+  @media (max-width: 1023px) { @content; }
+}

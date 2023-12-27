@@ -36,7 +36,6 @@ export class ScheduleItemComponent {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        console.log(this.route.snapshot.data['schedule']);
     }
 
     public isFull(): boolean {
@@ -72,7 +71,7 @@ export class ScheduleItemComponent {
                 if (confirmed) {
                     const unapproved = this.schedule.unapproved?.map(applicant => applicant.id) ?? [];
                     this.httpService.patch<Schedule>(`api/schedules/${this.schedule.id}`, {
-                        unapproved_entrants: [...unapproved, this.userId]
+                        unapproved_entrants: [...unapproved, +this.userId]
                     }).pipe(take(1))
                         .subscribe(resp => {
                             this.schedule.unapproved = [...resp.unapproved];

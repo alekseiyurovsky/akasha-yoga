@@ -1,11 +1,12 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {User} from "../../app/typeorm/entities/User";
-import {Equal, In, MoreThan, Repository} from 'typeorm';
+import {ArrayContains, Equal, In, MoreThan, Repository} from 'typeorm';
 import {InjectRepository} from "@nestjs/typeorm";
 import {CreateUserDto} from "../dtos/CreateUser.dto";
 import {PatchUserDetails} from "../utils/types";
 import {Schedule} from "../../app/typeorm/entities/Schedule";
 import * as bcrypt from 'bcrypt';
+import {ArrayOverlap} from "typeorm/find-options/operator/ArrayOverlap";
 
 @Injectable()
 export class UsersService {
@@ -27,12 +28,46 @@ export class UsersService {
         return this.userRepository.findOne({where: {email}, relations: ['role']});
     }
 
-    public async getUserSchedules(id: number): Promise<Schedule[]> {
-        const trainings = await this.scheduleRepository
-            .createQueryBuilder('schedule')
-            .where(`date > CURDATE() AND (JSON_CONTAINS('unapproved_entrants', "${id}") OR JSON_CONTAINS(approved_entrants, "${id}"))`)
-            .getMany();
-        return trainings;
+    public async getUserSchedules(id: number) {
+        const schedules = await this.scheduleRepository.find({
+            where: [
+                {
+                    date: MoreThan(new Date()),
+                    unapproved_entrants: ArrayOverlap([id])
+                },
+                {
+                    date: MoreThan(new Date()),
+                    approved_entrants: ArrayOverlap([id])
+                }
+            ],
+            select: {
+                author: {
+                    name: true,
+                    surname: true
+                },
+                training: {
+                    max_count: true,
+                    duration: true,
+                    image_url: true,
+                    name: true,
+                    id: true
+                }
+            },
+            relations: ['author', 'training']
+        });
+
+        return await Promise.all(schedules.map(async schedule => await this.getUsersFromSchedule(schedule)));
+    }
+
+    private async getUsersFromSchedule({approved_entrants, unapproved_entrants, ...schedule}: Schedule) {
+        let approved, unapproved = [];
+        if (approved_entrants as unknown as number[]) {
+            approved = await this.findMany(approved_entrants as unknown as number[]);
+        }
+        if (unapproved_entrants as unknown as number[]) {
+            unapproved = await this.findMany(unapproved_entrants as unknown as number[]);
+        }
+        return {...schedule, approved, unapproved};
     }
 
     public async getInstructorSchedules(id: number): Promise<Schedule[]> {

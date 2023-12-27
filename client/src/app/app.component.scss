@@ -1,9 +1,22 @@
 @import './../styles/variables';
 
+:host {
+  padding-bottom: 8px;
+  display: block;
+  min-height: 100vh;
+}
+
 main {
   display: block;
-  width: 100%;
   min-height: 300px;
   max-width: $base-width;
   margin: 0 auto;
+
+  @include tablet {
+    margin: 1.25rem;
+  }
+
+  @include mobile {
+    margin: 0;
+  }
 }

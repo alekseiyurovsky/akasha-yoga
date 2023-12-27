@@ -16,6 +16,8 @@ import {SignupPopupComponent} from "../../user/ui/signup-popup.component";
 })
 export class HeaderComponent {
 
+    public isMenuOpen = true;
+
     @ViewChild(AdDirective, {static: true}) adHost!: AdDirective;
 
     constructor(
@@ -32,6 +34,7 @@ export class HeaderComponent {
                 viewContainerRef.clear();
             });
     }
+
 
     public signup(): void {
         const viewContainerRef = this.adHost.viewContainerRef;

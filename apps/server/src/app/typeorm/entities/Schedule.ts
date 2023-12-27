@@ -10,11 +10,11 @@ export class Schedule {
     @Column('datetime')
     date: Date;
 
-    @Column({default: '[]'})
-    unapproved_entrants: string;
+    @Column({type: 'json', nullable: true})
+    unapproved_entrants: number[];
 
-    @Column({default: '[]'})
-    approved_entrants: string;
+    @Column({type: 'json', nullable: true})
+    approved_entrants: number[];
 
     @Column()
     training_id: number;

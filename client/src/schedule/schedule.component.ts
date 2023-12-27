@@ -55,7 +55,8 @@ export class ScheduleComponent {
         if (schedule.unapproved?.some(user => user.id === this.userId)) {
             return 'unapproved';
         }
-        return 'default';
+        const isFull = schedule.training.max_count === [...schedule.    approved ?? [], ...schedule.unapproved ?? []].length;
+        return isFull ? 'full' : 'default';
     }
 
     public showSubscribed(): void {
@@ -89,7 +90,7 @@ export class ScheduleComponent {
                 id: scheduleItem.id,
                 start: scheduleItem.date,
                 title: `${scheduleItem.training.name}${isFull ? ' (Nav vietu)' : ''}`,
-                className: isFull ? 'full' : this.getEventClassName(scheduleItem)
+                className: this.getEventClassName(scheduleItem)
             }
         });
     }

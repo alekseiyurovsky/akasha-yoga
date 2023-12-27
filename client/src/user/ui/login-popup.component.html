@@ -6,7 +6,7 @@
       <button class="delete" aria-label="close" (click)="dismiss()"></button>
     </header>
     <section class="modal-card-body">
-      <div class="notification is-danger" *ngIf="error.length">
+      <div class="notification is-danger" *ngIf="error?.length">
         {{error}}
       </div>
       <input class="input" type="email" [(ngModel)]="email" placeholder="E-pasts">

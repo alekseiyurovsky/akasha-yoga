@@ -6,8 +6,8 @@ html {
 }
 
 body {
-  height: 100vh;
-  background-image: url("/assets/images/cover.png");
+  height: 100%;
+  background-image: url("/assets/images/cover (2).jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,5 +42,13 @@ full-calendar {
       }
     }
   }
+}
 
+fse-header {
+  .navbar {
+    .fa-1x {
+      font-size: 2rem;
+      color: #363636;
+    }
+  }
 }

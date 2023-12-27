@@ -2,12 +2,24 @@
   <div class="content">
     <div class="logo-container">
       <img [routerLink]="['']" class="logo" src="/assets/images/yoga.png" alt="">
+      <img [routerLink]="['']" class="logo-mobile" src="/assets/images/yoga-mobile.png" alt="">
     </div>
     <div class="links">
       <a class="link" target="_blank" href="https://www.facebook.com/akashajoga"><img src="/assets/images/fb.svg" alt=""></a>
       <a class="link" target="_blank" href="https://www.youtube.com/@akashajoga9074"><img src="/assets/images/yt.svg" alt=""></a>
       <a class="link" target="_blank" href="https://www.instagram.com/"><img src="/assets/images/in.svg" alt=""></a>
     </div>
+    <!--Navbar-->
+    <nav class="navbar navbar-light light-blue lighten-4">
+
+      <!-- Collapse button -->
+      <button class="navbar-toggler toggler-example open" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+              aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation" (click)="isMenuOpen = !isMenuOpen">
+        <span class="dark-blue-text"><i class="fas fa-bars fa-1x"></i></span>
+      </button>
+
+    </nav>
+    <!--/.Navbar-->
   </div>
   <div class="tabs">
     <div class="tab" [routerLink]="['/about']">Par Mums</div>
@@ -25,6 +37,16 @@
       <span class="tab" (click)="login()">Ielogoties</span> / <span class="tab" (click)="signup()">Pierakstītes</span>
     </div>
   </ng-template>
+  <div class="mobile-collapsable" *ngIf="isMenuOpen">
+    <div class="tab" [routerLink]="['/about']">Par Mums</div>
+    <div class="tab" [routerLink]="['/news']">Jaunumi</div>
+    <div class="tab" [routerLink]="['/blog']">Blogs</div>
+    <div class="tab" [routerLink]="['/trainings']">Treņini</div>
+    <div class="tab" [routerLink]="['/schedule']" >Nodarbību grafiks</div>
+    <ng-template [ngIf]="dataService.isLoggedIn()" [ngIfElse]="loginTab">
+      <div class="tab" [routerLink]="['/user']">Kabinets</div>
+    </ng-template>
+  </div>
 </div>
 <ng-template adHost></ng-template>
 
